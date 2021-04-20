@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
+    <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='open_street_map.js') }}"></script>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+
+    <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/smartphoto@1.1.0/css/smartphoto.min.css">
+    <title>Test</title>
+  </head>
+
+  <body>
+    <div id="page">
+      <div id="activities">
+        {% for d in content %}
+            <div class="activity">
+                  <h2><a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a></h2>
+                  <p>{{d[6]}}</p>
+                  {% if d[14] is not none  %}
+                      <div class="images">
+                          {% set images_small = d[14].split(",") %}
+                          {% set images_big = d[15].split(",") %}
+                          {% for i in range(images_small|length) %}
+                              <a href="{{images_big[i]}}" class="js-smartPhoto"><img src="{{images_small[i]}}" alt=""/></a>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+            </div>
+        {% endfor %}
+      </div>
+      <div id="map"></div>
+      <script>create_map({{polylines|safe}});</script>
+      <script>
+
+window.addEventListener('DOMContentLoaded',function(){
+    new SmartPhoto(".js-smartPhoto");
+});
+
+</script>
+    </div>
+  </body>
+</html>
+
