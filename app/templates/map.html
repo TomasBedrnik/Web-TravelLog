@@ -22,8 +22,9 @@
                       <div class="images">
                           {% set images_small = d[14].split(",") %}
                           {% set images_big = d[15].split(",") %}
+                          {% set images_caption = d[16].split(",") %}
                           {% for i in range(images_small|length) %}
-                              <a href="{{images_big[i]}}" class="js-smartPhoto"><img src="{{images_small[i]}}" alt=""/></a>
+                              <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img src="{{images_small[i]}}" alt=""/></a>
                           {% endfor %}
                       </div>
                   {% endif %}

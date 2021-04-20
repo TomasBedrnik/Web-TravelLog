@@ -7,6 +7,7 @@ db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credenti
 
 cursor = db.cursor()
 
+# TODO: add foreign keys
 # ## check if table exist... create it
 cursor.execute("SHOW TABLES like 'user_credentials'")
 result = cursor.fetchone()
@@ -43,6 +44,7 @@ if not result:
     cursor.execute("CREATE TABLE `photos` "
                    "(`id` varchar(255) NOT NULL PRIMARY KEY,"
                    "`activity_id` bigint NOT NULL,"
+                   "`caption` text NOT NULL,"
                    "`url_small` varchar(255) NOT NULL,"
                    "`url_big` varchar(255) NOT NULL)")
 

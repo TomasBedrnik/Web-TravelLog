@@ -30,6 +30,7 @@ def create_app():
             "Refreshed"
         )
 
+    # TODO: somehow just allow to run this only once - or only from shell to prevent bots to trigger it
     @app.route('/download_activities_from_strava')
     def download():
         read.download_activities_from_strava()
