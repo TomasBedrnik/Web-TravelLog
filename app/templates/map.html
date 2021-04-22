@@ -1,13 +1,14 @@
 <html>
   <head>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>
-    <script type="text/javascript" src="https://rawgit.com/jieter/Leaflet.encoded/master/Polyline.encoded.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="{{ url_for('static', filename='leaflet.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='Polyline.encoded.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='open_street_map.js') }}"></script>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='leaflet.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
 
-    <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/smartphoto@1.1.0/css/smartphoto.min.css">
+    <script src="{{ url_for('static', filename='smartphoto.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='smartphoto.min.css') }}">
     <title>Test</title>
   </head>
 
