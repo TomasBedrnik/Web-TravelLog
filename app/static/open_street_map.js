@@ -2,7 +2,7 @@ function create_map(polylines)
 {
     var map = L.map('map').setView([49.817, 15.478], 8);
     L.tileLayer(
-      'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 18,
       }).addTo(map);
 
