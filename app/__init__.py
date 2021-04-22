@@ -4,12 +4,13 @@ from flask import request
 from flask import abort
 from flask import redirect
 from flask import render_template
+from flask import jsonify
 import requests
 from credentials import Credentials
 import mysql.connector as mysql
 from app import auth
 from app import read
-
+from datetime import datetime
 
 def create_app():
     app = Flask(__name__)
@@ -19,7 +20,7 @@ def create_app():
         return render_template("index.html")
 
     @app.route('/map')
-    def map():
+    def show_map():
         return render_template("map.html", content=read.read_activities(), polylines=read.read_activities_map())
 
     # TODO: Delete this when alpha development stage finished
@@ -37,6 +38,43 @@ def create_app():
         return Response(
             "done"
         )
+
+    # TODO: somehow just allow to run this only once - or only from shell to prevent bots to trigger it
+    @app.route('/download_single_activity_from_strava/<int:activity_id>')
+    def download_single(activity_id):
+        read.download_single_activity_from_strava(activity_id)
+        return Response(
+            "done"
+        )
+
+    @app.route('/webhook', methods=['GET', 'POST'])
+    def webhook():
+        if request.method == 'GET':
+            # mode = request.args.get('hub.mode')
+            challenge = ""
+            if "hub.challenge" in request.args.keys():
+                challenge = request.args.get('hub.challenge')
+            # verify_token = request.args.get('hub.verify_token ')
+            data = {
+                "hub.challenge": challenge
+                }
+            return jsonify(data), 200
+        elif request.method == 'POST':
+            request_data = request.get_json()
+            db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                               database=Credentials.database)
+            cursor = db.cursor()
+            cursor.execute("INSERT INTO log (`date`, `text`) "
+                           "VALUES (%s, %s); ", (datetime.now(), str(request_data)))
+            db.commit()
+            db.disconnect()
+            if "aspect_type" in request_data.keys() and "object_type" in request_data.keys() and \
+                    "object_id" in request_data.keys():
+                if request_data["object_type"] == 'activity':
+                    if request_data["aspect_type"] == 'create' or request_data["aspect_type"] == 'update':
+                        read.download_single_activity_from_strava(request_data["object_id"])
+
+            return "", 200
 
     @app.route('/authorize')
     def authorize():

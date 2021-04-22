@@ -48,6 +48,13 @@ if not result:
                    "`url_small` varchar(255) NOT NULL,"
                    "`url_big` varchar(255) NOT NULL)")
 
+cursor.execute("SHOW TABLES like 'log'")
+result = cursor.fetchone()
+if not result:
+    cursor.execute("CREATE TABLE `log` "
+                   "(`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                   "`date` varchar(255),"
+                   "`text` text)")
 db.commit()
 db.disconnect()
 
