@@ -7,11 +7,21 @@
 .activity .images {margin:0.4em;}
 .activity img {height:5em;}
 #map {overflow: hidden;height:100%;}
-.activity_N0 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #e41a1c);}
-.activity_N1 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #377eb8);}
-.activity_N2 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #5aaf00);}
-.activity_N3 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #984ea3);}
-.activity_N4 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ff7f00);}
-.activity_N5 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ffff33);}
-.activity_N6 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #a65628);}
-.activity_N7 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #f781bf);}
+.activity_N0 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #e41a1c);}
+.activity_N1 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
+.activity_N2 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #5aaf00);}
+.activity_N3 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #984ea3);}
+.activity_N4 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ff7f00);}
+.activity_N5 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ffff33);}
+.activity_N6 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #a65628);}
+.activity_N7 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #f781bf);}
+
+.activity_description {margin:0 0.5em 0 0.5em}
+
+/* checkbox hack */
+input[type="checkbox"] {display:none;}
+label {color:blue; text-decoration:underline; margin-top:0.5em; cursor:pointer; display:inline-block;width:100%; text-align:right;}
+label:after {content:"více";}
+input:checked ~ label:after {content:"méně";}
+.activity_description_inner {max-height:5em; overflow:hidden; transition:all .3s ease;}
+input:checked + .activity_description_inner {max-height:100em;}
