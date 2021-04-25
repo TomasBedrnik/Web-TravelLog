@@ -2,22 +2,26 @@
 
 #activities {width: 30em;height:100%;float: left;overflow: scroll; overflow-x:hidden;background-color:#bcbcbc}
 .activity {border:1px solid #676767;border-radius:0.2em; background-color:white;margin:0.3em;}
-.activity h2 {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:0.2em;border-top-right-radius:0.2em;}
-.activity h2 a {color:black;font-weight:normal;}
+.activity_name {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:0.2em;border-top-right-radius:0.2em;}
+.activity_name a {color:black;font-weight:normal;display: inline-block;}
+.activity_name .date{width:7em;font-size:50%;display: inline-block;}
 .activity .images {margin:0.4em;}
 .activity img {height:5em;}
 #map {overflow: hidden;height:100%;}
-.activity_N0 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #e41a1c);}
-.activity_N1 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
-.activity_N2 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #5aaf00);}
-.activity_N3 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #984ea3);}
-.activity_N4 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ff7f00);}
-.activity_N5 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ffff33);}
-.activity_N6 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #a65628);}
-.activity_N7 h2 {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #f781bf);}
+.activity_N0 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #e41a1c);}
+.activity_N1 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
+.activity_N2 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #5aaf00);}
+.activity_N3 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #984ea3);}
+.activity_N4 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ff7f00);}
+.activity_N5 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #ffff33);}
+.activity_N6 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #a65628);}
+.activity_N7 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #f781bf);}
 
-.activity_description {margin:0 0.5em 0 0.5em}
-
+.activity_description {margin:0.4em 0.5em 0 0.5em}
+.activity_info {margin:0;padding:0.3em;}
+.info_item{display: inline-block;}
+.info_value{position:relative;top:0.6em;}
+.info_caption {float:left;width:1em;font-size:50%}
 /* checkbox hack */
 input[type="checkbox"] {display:none;}
 label {color:blue; text-decoration:underline; margin-top:0.5em; cursor:pointer; display:inline-block;width:100%; text-align:right;}

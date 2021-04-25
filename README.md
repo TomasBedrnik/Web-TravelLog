@@ -8,6 +8,8 @@ Simple Strava API auth described here: https://towardsdatascience.com/using-the-
 
 Display polylines on Open street maps with help from https://markhneedham.com/blog/2017/04/29/leaflet-strava-polylines-osm/
 
+Another test version is using mapy.cz API
+
 For displaying images it uses https://appleple.github.io/SmartPhoto/
 
 For map https://leafletjs.com/ and script Polyline.encoded.js from Jan Pieter Waagmeester

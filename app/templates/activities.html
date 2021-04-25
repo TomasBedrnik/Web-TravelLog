@@ -1,0 +1,36 @@
+<div id="activities">
+        {% set count = namespace(value=0) %}
+        {% set count2 = namespace(value=0) %}
+        {% for d in content %}
+            <div class="activity activity_N{{count.value}}">
+                <div class="activity_name"><div class="date">{{d[4].strftime('%d. %m. %Y %H:%M')}}</div> <a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a></div>
+                <div class="activity_info">
+                    <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(d[6]/1000)}} km</span></div>
+                    <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{d[7]}}</span></div>
+                    <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{d[8]}}</span></div>
+                </div>
+                  <div class="activity_description">
+                      <input type="checkbox" id="readmore_N{{count2.value}}" />
+                      <div class="activity_description_inner">
+                        {{d[11]}}
+                      </div>
+                      <label class="more_label" for="readmore_N{{count2.value}}">Zobrazit </label>
+                  </div>
+                  {% if d[14] is not none  %}
+                      <div class="images">
+                          {% set images_small = d[14].split(",") %}
+                          {% set images_big = d[15].split(",") %}
+                          {% set images_caption = d[16].split(",") %}
+                          {% for i in range(images_small|length) %}
+                              <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img src="{{images_small[i]}}" alt=""/></a>
+                          {% endfor %}
+                      </div>
+                  {% endif %}
+            </div>
+          {% set count.value = count.value + 1 %}
+          {% set count2.value = count2.value + 1 %}
+          {% if count.value >= 8 %}
+            {% set count.value = 0 %}
+          {% endif %}
+        {% endfor %}
+      </div>

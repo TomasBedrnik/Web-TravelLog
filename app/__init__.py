@@ -23,6 +23,10 @@ def create_app():
     def show_map():
         return render_template("map.html", content=read.read_activities(), polylines=read.read_activities_map())
 
+    @app.route('/mapycz')
+    def show_mapycz():
+        return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map())
+
     # TODO: Delete this when alpha development stage finished
     @app.route('/refresh')
     def refresh():
