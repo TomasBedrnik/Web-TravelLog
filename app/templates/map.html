@@ -17,10 +17,13 @@
   <body>
     <div id="page">
       <div id="activities">
+        {% set count = namespace(value=0) %}
         {% for d in content %}
-            <div class="activity">
+            <div class="activity activity_N{{count.value}}">
                   <h2><a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a></h2>
-                  <p>{{d[6]}}</p>
+                  <p>{{d[4].strftime('%d. %m. %Y %H:%MM')}}, {{'%0.1f'|format(d[6]/1000)}} km,
+                      {{d[7]}}, {{d[8]}}</p>
+                  <p>{{d[11]}}</p>
                   {% if d[14] is not none  %}
                       <div class="images">
                           {% set images_small = d[14].split(",") %}
@@ -32,6 +35,10 @@
                       </div>
                   {% endif %}
             </div>
+          {% set count.value = count.value + 1 %}
+          {% if count.value >= 8 %}
+            {% set count.value = 0 %}
+          {% endif %}
         {% endfor %}
       </div>
       <div id="map"></div>

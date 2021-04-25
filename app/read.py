@@ -1,6 +1,8 @@
 import requests
 from credentials import Credentials
 import mysql.connector as mysql
+import datetime
+
 from app import auth
 
 
@@ -13,8 +15,15 @@ def read_activities():
                    "`moving_time`, `elapsed_time`, `total_elevation_gain`, `type`, `description`, `total_photo_count`, "
                    "GROUP_CONCAT(p.id), GROUP_CONCAT(p.url_small), GROUP_CONCAT(p.url_big), GROUP_CONCAT(p.caption) "
                    "FROM activities as a "
-                   "LEFT JOIN photos as p ON a.id = p.activity_id group by a.id order by a.id desc")
+                   "LEFT JOIN photos as p ON a.id = p.activity_id group by a.id order by a.start_date_local desc")
     data = cursor.fetchall()
+    # format output
+    for i, val in enumerate(data):
+        data[i] = list(val)
+        data[i][4] = datetime.datetime.strptime(val[4], "%Y-%m-%dT%H:%M:%SZ")
+        data[i][7] = ':'.join(str(datetime.timedelta(seconds=val[8])).split(':')[:2])
+        data[i][8] = ':'.join(str(datetime.timedelta(seconds=val[7])).split(':')[:2])
+
     db.commit()
     db.disconnect()
     return data
@@ -25,7 +34,7 @@ def read_activities_map():
                        database=Credentials.database)
     cursor = db.cursor()
     # cursor.execute("SELECT * FROM activities")
-    cursor.execute("SELECT polyline FROM activities")
+    cursor.execute("SELECT polyline FROM activities order by start_date_local desc")
     data = cursor.fetchall()
     list_polyline = []
     for d in data:
