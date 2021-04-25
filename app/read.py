@@ -62,6 +62,16 @@ def update_photos(user_id, cursor, headers):
                                )
 
 
+def delete_activity(activity_id):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database)
+    cursor = db.cursor()
+    cursor.execute("DELETE FROM activities WHERE id='%s'; ", (activity_id,))
+    cursor.execute("DELETE FROM photos WHERE activity_id='%s'; ", (activity_id,))
+    db.commit()
+    db.disconnect()
+
+
 def update_activity(user_id, cursor, headers):
     r = requests.get("https://www.strava.com/api/v3/activities/" + str(user_id), headers=headers)
     if r.ok:

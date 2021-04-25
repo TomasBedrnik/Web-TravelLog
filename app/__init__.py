@@ -31,18 +31,26 @@ def create_app():
             "Refreshed"
         )
 
-    # TODO: somehow just allow to run this only once - or only from shell to prevent bots to trigger it
-    @app.route('/download_activities_from_strava')
-    def download():
-        read.download_activities_from_strava()
+    # TODO: Delete this when alpha development stage finished
+    @app.route('/download_single_activity_from_strava/<int:activity_id>')
+    def download_single(activity_id):
+        read.download_single_activity_from_strava(activity_id)
+        return Response(
+            "done"
+        )
+
+    # TODO: Delete this when alpha development stage finished
+    @app.route('/delete_activity/<int:activity_id>')
+    def delete_activity(activity_id):
+        read.delete_activity(activity_id)
         return Response(
             "done"
         )
 
     # TODO: somehow just allow to run this only once - or only from shell to prevent bots to trigger it
-    @app.route('/download_single_activity_from_strava/<int:activity_id>')
-    def download_single(activity_id):
-        read.download_single_activity_from_strava(activity_id)
+    @app.route('/download_activities_from_strava')
+    def download():
+        read.download_activities_from_strava()
         return Response(
             "done"
         )
@@ -73,6 +81,8 @@ def create_app():
                 if request_data["object_type"] == 'activity':
                     if request_data["aspect_type"] == 'create' or request_data["aspect_type"] == 'update':
                         read.download_single_activity_from_strava(request_data["object_id"])
+                    elif request_data["aspect_type"] == 'delete':
+                        read.delete_activity(request_data["object_id"])
 
             return "", 200
 
