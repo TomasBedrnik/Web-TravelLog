@@ -2,10 +2,10 @@
         {% set count = namespace(value=0) %}
         {% set count2 = namespace(value=0) %}
         {% for d in content %}
-            <div class="activity activity_N{{count.value}}">
+            <div class="activity activity_{{count.value}}" id="activity_{{count2.value}}">
                 <div class="activity_name">
                     <div class="date">{{d[4].strftime('%d. %m. %Y %H:%M')}}</div>
-                    <a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a>
+                    <a href="https://www.strava.com/activities/{{d[0]}}" target="_blank">{{d[5]}}</a>
                     <a class="zoom" href="#">
                         <img src="{{ url_for('static', filename='external/images/zoom-in-fill.png') }}"
                              alt="Přiblížit" />
@@ -17,11 +17,11 @@
                     <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{d[8]}}</span></div>
                 </div>
                   <div class="activity_description">
-                      <input type="checkbox" id="readmore_N{{count2.value}}" />
+                      <input type="checkbox" id="readmore_{{count2.value}}" />
                       <div class="activity_description_inner">
                         {{d[11]}}
                       </div>
-                      <label class="more_label" for="readmore_N{{count2.value}}">Zobrazit </label>
+                      <label class="more_label" for="readmore_{{count2.value}}">Zobrazit </label>
                   </div>
                   {% if d[14] is not none  %}
                       <div class="images">
