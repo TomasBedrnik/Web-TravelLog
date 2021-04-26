@@ -25,9 +25,10 @@
 .info_item{display: inline-block;}
 .info_value{position:relative;top:0.6em;}
 .info_caption {float:left;width:1em;font-size:50%}
+.strava_link {max-width:80%;}
 /* checkbox hack */
 input[type="checkbox"] {display:none;}
-label {color:blue; text-decoration:underline; margin-top:0.5em; cursor:pointer; display:inline-block;width:100%; text-align:right;}
+label {color:blue; text-decoration:underline; cursor:pointer; display:inline-block;width:100%; text-align:right;}
 label:after {content:"více";}
 input:checked ~ label:after {content:"méně";}
 .activity_description_inner {max-height:5em; overflow:hidden; transition:all .3s ease;}
