@@ -3,7 +3,14 @@
         {% set count2 = namespace(value=0) %}
         {% for d in content %}
             <div class="activity activity_N{{count.value}}">
-                <div class="activity_name"><div class="date">{{d[4].strftime('%d. %m. %Y %H:%M')}}</div> <a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a></div>
+                <div class="activity_name">
+                    <div class="date">{{d[4].strftime('%d. %m. %Y %H:%M')}}</div>
+                    <a href="https://www.strava.com/activities/{{d[0]}}">{{d[5]}}</a>
+                    <a class="zoom" href="#">
+                        <img src="{{ url_for('static', filename='external/images/zoom-in-fill.png') }}"
+                             alt="Přiblížit" />
+                    </a>
+                </div>
                 <div class="activity_info">
                     <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(d[6]/1000)}} km</span></div>
                     <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{d[7]}}</span></div>

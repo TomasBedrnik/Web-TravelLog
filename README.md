@@ -13,3 +13,5 @@ Another test version is using mapy.cz API
 For displaying images it uses https://appleple.github.io/SmartPhoto/
 
 For map https://leafletjs.com/ and script Polyline.encoded.js from Jan Pieter Waagmeester
+
+Icons from https://remixicon.com/

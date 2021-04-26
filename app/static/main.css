@@ -29,3 +29,6 @@ label:after {content:"více";}
 input:checked ~ label:after {content:"méně";}
 .activity_description_inner {max-height:5em; overflow:hidden; transition:all .3s ease;}
 input:checked + .activity_description_inner {max-height:100em;}
+
+a.zoom {float:right;}
+a.zoom img {height:1.1em;}

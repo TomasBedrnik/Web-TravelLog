@@ -1,36 +1,71 @@
-function add_mapycz(polylines){
-var center = SMap.Coords.fromWGS84(14.41790, 50.12655);
-var m = new SMap(JAK.gel("map"), center, 8);
-m.addDefaultLayer(SMap.DEF_TURIST).enable();
-m.addControl(new SMap.Control.Sync({bottomSpace:0})); /* Aby mapa reagovala na změnu velikosti průhledu */
-m.addDefaultControls();
+function add_mapycz(polylines) {
+    /* Create Map */
+    let center = SMap.Coords.fromWGS84(15.478, 49.817);
+    let m = new SMap(JAK.gel("map"), center, 8);
+    m.addDefaultLayer(SMap.DEF_TURIST).enable();
+    m.addControl(new SMap.Control.Sync({bottomSpace: 0})); /* Aby mapa reagovala na změnu velikosti průhledu */
+    m.addDefaultControls();
 
 
-let layer = new SMap.Layer.Geometry();
-m.addLayer(layer);
-layer.enable();
+    let layer = new SMap.Layer.Geometry();
+    m.addLayer(layer);
+    layer.enable();
 
     let encodedRoutes = polylines;
     let colours = ["#e41a1c", "#377eb8", "#5aaf00", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"];
-    let i = 0
+    let i = 0;
+    let y = 0;
+    let array_coordinates = [];
     for (let encoded of encodedRoutes) {
         let coordinates = L.Polyline.fromEncoded(encoded).getLatLngs();
-        let testArray  = [];
+        array_coordinates.push([]);
         for (let coord of coordinates) {
-            testArray.push(SMap.Coords.fromWGS84(coord["lng"], coord["lat"]))
+            array_coordinates[y].push(SMap.Coords.fromWGS84(coord["lng"], coord["lat"]))
         }
-        let options1 = {
+
+        /* "title", "minDist", "color", "opacity", "width", "style", "outlineColor", "outlineOpacity", "outlineWidth", "outlineStyle" */
+        let options = {
             color: colours[i],
-            width: 5
+            width: 3,
+            opacity: 1,
+            outlineColor: 'black',
+            outlineWidth: 1
         };
-        let polyline = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, testArray, options1);
+        let polyline = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, array_coordinates[y], options);
         layer.addGeometry(polyline);
 
-        i++
-        if(i >= 8) {
+        i++;
+        y++;
+        if (i >= 8) {
             i = 0
         }
     }
 
+    /* Listeners for Activity menu */
+    let activities = document.getElementsByClassName("activity");
+    let polyline;
+    for (let i = 0; i < activities.length; i++) {
+        /* Highlight activity on mouse hover */
+        activities[i].addEventListener("mouseenter", function (event) {
+            let options = {
+                color: colours[i % 8],
+                width: 10,
+                opacity: 1,
+                outlineColor: 'black',
+                outlineWidth: 1
+            };
+            polyline = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, array_coordinates[i], options);
+            layer.addGeometry(polyline);
+        }, false);
+        activities[i].addEventListener("mouseleave", function (event) {
+            layer.removeGeometry(polyline);
+        }, false);
 
+        /* Zoom to selected activity */
+        activities[i].getElementsByClassName("zoom")[0]
+            .addEventListener("click", function (event) {
+            m.setCenter(array_coordinates[i][0],true);
+            m.setZoom(12,array_coordinates[i][0],true);
+        }, false);
+    }
 }
