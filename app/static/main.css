@@ -7,7 +7,7 @@
 .activity_name .date{width:7em;font-size:50%;display: inline-block;}
 .activity .images {margin:0.4em;}
 .activity img {height:5em;}
-#map {overflow: hidden;height:100%;}
+#map {overflow: hidden;height:100%;touch-action:none;}
 .activity_0 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #e41a1c);}
 .activity_1 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
 .activity_2 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #5aaf00);}
