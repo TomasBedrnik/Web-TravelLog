@@ -6,6 +6,41 @@ import datetime
 from app import auth
 
 
+def read_activity(activity_id):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database)
+    cursor = db.cursor()
+
+    cursor.execute("SELECT a.id, `user_id`, `upload_id`, `external_id`, `start_date_local`, `name`, `distance`, "
+                   "`moving_time`, `elapsed_time`, `total_elevation_gain`, `type`, `description`, `total_photo_count`, "
+                   "GROUP_CONCAT(p.id), GROUP_CONCAT(p.url_small), GROUP_CONCAT(p.url_big), GROUP_CONCAT(p.caption) "
+                   "FROM activities as a "
+                   "LEFT JOIN photos as p ON a.id = p.activity_id "
+                   "WHERE a.id='%s'", (activity_id,))
+    data = cursor.fetchone()
+    data = list(data)
+    data[4] = datetime.datetime.strptime(data[4], "%Y-%m-%dT%H:%M:%SZ")
+    data[7] = ':'.join(str(datetime.timedelta(seconds=data[7])).split(':')[:2])
+    data[8] = ':'.join(str(datetime.timedelta(seconds=data[8])).split(':')[:2])
+    # format output
+    db.disconnect()
+    return data
+
+
+def read_activity_map(activity_id):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database)
+    cursor = db.cursor()
+    # cursor.execute("SELECT * FROM activities")
+    cursor.execute("SELECT polyline FROM activities WHERE id='%s'", (activity_id,))
+    data = cursor.fetchall()
+    list_polyline = []
+    for d in data:
+        list_polyline.append(d[0])
+    db.disconnect()
+    return list_polyline
+
+
 def read_activities():
     db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
                        database=Credentials.database)
@@ -21,10 +56,8 @@ def read_activities():
     for i, val in enumerate(data):
         data[i] = list(val)
         data[i][4] = datetime.datetime.strptime(val[4], "%Y-%m-%dT%H:%M:%SZ")
-        data[i][7] = ':'.join(str(datetime.timedelta(seconds=val[8])).split(':')[:2])
-        data[i][8] = ':'.join(str(datetime.timedelta(seconds=val[7])).split(':')[:2])
-
-    db.commit()
+        data[i][7] = ':'.join(str(datetime.timedelta(seconds=val[7])).split(':')[:2])
+        data[i][8] = ':'.join(str(datetime.timedelta(seconds=val[8])).split(':')[:2])
     db.disconnect()
     return data
 
@@ -39,7 +72,6 @@ def read_activities_map():
     list_polyline = []
     for d in data:
         list_polyline.append(d[0])
-    db.commit()
     db.disconnect()
     return list_polyline
 

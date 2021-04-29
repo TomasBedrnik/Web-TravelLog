@@ -1,0 +1,73 @@
+<html>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <script src="{{ url_for('static', filename='external/leaflet.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='external/leaflet.css') }}"/>
+
+    <script src="{{ url_for('static', filename='external/smartphoto.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='external/smartphoto.min.css') }}">
+
+    <script type="text/javascript" src="{{ url_for('static', filename='external/Polyline.encoded.js') }}"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
+
+    <script type="text/javascript" src="https://api.mapy.cz/loader.js"></script>
+    <script type="text/javascript">Loader.load();</script>
+    <script type="text/javascript" src="{{ url_for('static', filename='mapycz.js') }}"></script>
+    <title>{{content[5]}}</title>
+</head>
+
+<body>
+<div id="page">
+    <div id="single_activity">
+        <div id="single_activity_name">
+            <div class="date">{{content[4].strftime('%d. %m. %Y %H:%M')}}</div>
+            <h1>{{content[5]}}</h1>
+        </div>
+        <div class="activity_info">
+            <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[6]/1000)}} km</span>
+            </div>
+            <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[8]}}</span>
+            </div>
+            <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{content[7]}}</span>
+            </div>
+        </div>
+        <div class="single_activity_description">
+                {{content[11]}}
+        </div>
+        <div id="comments">
+            <h2>Komentáře</h2>
+            <form action="#comments" method="post">
+                <label for="firstname" id="firstname_label">First name</label><br/>
+                <input type="text" id="firstname" name="firstname" /><br/>
+                <label for="name" id="name_label">Jméno</label><br/>
+                <input type="text" id="name" name="firstname" /><br/>
+                <label for="comment" id="comment_label">Komentář</label><br/>
+                <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br/>
+                <input type="submit" value="Odeslat">
+            </form>
+        </div>
+    </div>
+    <div id="right_column">
+        <div id="map" class="small_map"></div>
+
+        {% if content[14] is not none %}
+        <div class="images">
+            {% set images_small = content[14].split(",") %}
+            {% set images_big = content[15].split(",") %}
+            {% set images_caption = content[16].split(",") %}
+            {% for i in range(images_small|length) %}
+            <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img
+                    src="{{images_small[i]}}" alt=""/></a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <script>
+        window.addEventListener("load", add_mapycz_single({{polylines|safe}}));
+        window.addEventListener('DOMContentLoaded', function () { new SmartPhoto(".js-smartPhoto"); });
+    </script>
+</div>
+</body>
+</html>

@@ -26,12 +26,45 @@ let all_click_listener = function (e) {
     just_selected = false;
 }
 
+function add_mapycz_single(polyline) {
+    /* Create Map */
+    let center = SMap.Coords.fromWGS84(15.478, 49.817);
+    let m = new SMap(JAK.gel("map"), center, 8);
+    m.addDefaultLayer(SMap.DEF_TURIST).enable();
+    m.addControl(new SMap.Control.Sync({bottomSpace: 0}));
+    m.addDefaultControls();
+
+    let layer = new SMap.Layer.Geometry();
+    m.addLayer(layer);
+    layer.enable();
+
+    let coordinates = L.Polyline.fromEncoded(polyline[0]).getLatLngs();
+    let array_coordinates = [];
+    for (let coord of coordinates) {
+        array_coordinates.push(SMap.Coords.fromWGS84(coord["lng"], coord["lat"]))
+    }
+
+    let zoomCoords = m.computeCenterZoom(array_coordinates)
+    m.setCenter(zoomCoords[0], true);
+    m.setZoom(zoomCoords[1], zoomCoords[0], true);
+
+    let options = {
+        color: '#e41a1c',
+        width: 3,
+        opacity: 1,
+        outlineColor: 'black',
+        outlineWidth: 1
+    };
+    let line = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, array_coordinates, options);
+    layer.addGeometry(line);
+}
+
 function add_mapycz(polylines) {
     /* Create Map */
     let center = SMap.Coords.fromWGS84(15.478, 49.817);
     let m = new SMap(JAK.gel("map"), center, 8);
     m.addDefaultLayer(SMap.DEF_TURIST).enable();
-    m.addControl(new SMap.Control.Sync({bottomSpace: 0})); /* Aby mapa reagovala na změnu velikosti průhledu */
+    m.addControl(new SMap.Control.Sync({bottomSpace: 0}));
     m.addDefaultControls();
 
     var signals = m.getSignals();
@@ -89,8 +122,9 @@ function add_mapycz(polylines) {
         /* Zoom to selected activity */
         activities[i].getElementsByClassName("zoom")[0]
             .addEventListener("click", function (event) {
-                m.setCenter(array_coordinates[i][0], true);
-                m.setZoom(11, array_coordinates[i][0], true);
+                let zoomCoords = m.computeCenterZoom(array_coordinates[i])
+                m.setCenter(zoomCoords[0], true);
+                m.setZoom(zoomCoords[1], zoomCoords[0], true);
             }, false);
     }
 }

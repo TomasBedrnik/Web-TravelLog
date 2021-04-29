@@ -7,7 +7,7 @@
 .activity_name .date{width:7em;font-size:50%;display: inline-block;}
 .activity .images {margin:0.4em;}
 .activity img {height:5em;}
-#map {overflow: hidden;height:100%;touch-action:none;}
+.big_map {overflow: hidden;height:100%;touch-action:none;}
 .activity_0 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #e41a1c);}
 .activity_1 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
 .activity_2 .activity_name {background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #5aaf00);}
@@ -25,14 +25,20 @@
 .info_item{display: inline-block;}
 .info_value{position:relative;top:0.6em;}
 .info_caption {float:left;width:1em;font-size:50%}
-.strava_link {max-width:80%;}
+.activity_link {max-width:80%;}
 /* checkbox hack */
-input[type="checkbox"] {display:none;}
-label {color:blue; text-decoration:underline; cursor:pointer; display:inline-block;width:100%; text-align:right;}
-label:after {content:"více";}
-input:checked ~ label:after {content:"méně";}
+.activity_description input[type="checkbox"] {display:none;}
+.activity_description label {color:blue; text-decoration:underline; cursor:pointer; display:inline-block;width:100%; text-align:right;}
+.activity_description label:after {content:"více";}
+.activity_description input:checked ~ label:after {content:"méně";}
 .activity_description_inner {max-height:5em; overflow:hidden; transition:all .3s ease;}
-input:checked + .activity_description_inner {max-height:100em;}
+.activity_description input:checked + .activity_description_inner {max-height:100em;}
 
 a.zoom {float:right;}
 a.zoom img {height:1.1em;}
+
+#single_activity {float:left;height:100%;width:60em;overflow-y: scroll;}
+#right_column {display: flex; flex-flow: column; height: 100%;}
+.small_map {margin:0.5em;flex:auto;}
+#right_column  .images {margin:0.5em;}
+#right_column  .images img {height:15em;}

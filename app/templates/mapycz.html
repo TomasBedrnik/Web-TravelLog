@@ -16,13 +16,13 @@
     <script type="text/javascript">Loader.load();</script>
     <script type="text/javascript" src="{{ url_for('static', filename='mapycz.js') }}"></script>
 
-    <title>Test</title>
+    <title>Mapa</title>
 </head>
 
 <body>
 <div id="page">
     {% include 'activities.html' %}
-    <div id="map"></div>
+    <div id="map" class="big_map"></div>
     <script>
         window.addEventListener("load", add_mapycz({{polylines|safe}}));
         window.addEventListener("load", hide_more_labels);

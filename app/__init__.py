@@ -21,11 +21,18 @@ def create_app():
 
     @app.route('/map')
     def show_map():
-        return render_template("map.html", content=read.read_activities(), polylines=read.read_activities_map())
+        return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map())
 
     @app.route('/mapycz')
     def show_mapycz():
         return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map())
+
+    @app.route('/activity/<int:activity_id>', methods=['GET', 'POST'])
+    def show_activity(activity_id):
+        if request.method == 'POST':
+            print("YES")
+        return render_template("activity.html", content=read.read_activity(activity_id),
+                               polylines=read.read_activity_map(activity_id))
 
     # TODO: Delete this when alpha development stage finished
     @app.route('/refresh')

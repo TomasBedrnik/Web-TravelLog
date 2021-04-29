@@ -55,6 +55,17 @@ if not result:
                    "(`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,"
                    "`date` varchar(255),"
                    "`text` text)")
+
+
+cursor.execute("SHOW TABLES like 'comments'")
+result = cursor.fetchone()
+if not result:
+    cursor.execute("CREATE TABLE `comments` "
+                   "(`id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,"
+                   "`activity_id` bigint NOT NULL,"
+                   "`date` datetime,"
+                   "`name` varchar(255),"
+                   "`text` text)")
 db.commit()
 db.disconnect()
 
