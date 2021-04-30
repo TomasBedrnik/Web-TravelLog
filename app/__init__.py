@@ -30,9 +30,20 @@ def create_app():
     @app.route('/activity/<int:activity_id>', methods=['GET', 'POST'])
     def show_activity(activity_id):
         if request.method == 'POST':
-            print("YES")
-        return render_template("activity.html", content=read.read_activity(activity_id),
-                               polylines=read.read_activity_map(activity_id))
+            # Simple anti spam honeypot
+            if request.form["firstname"] != "":
+                return "We Don't Serve Robots!"
+            else:
+                # TODO: Sanitize data
+                name = request.form["name"]
+                text = request.form["comment"]
+                read.add_comment(activity_id, name, text)
+                return redirect("/activity/"+str(activity_id)+"#comments")
+
+        else:
+            return render_template("activity.html", content=read.read_activity(activity_id),
+                                   polylines=read.read_activity_map(activity_id),
+                                   comments=read.read_comments(activity_id))
 
     # TODO: Delete this when alpha development stage finished
     @app.route('/refresh')

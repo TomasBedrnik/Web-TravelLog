@@ -38,11 +38,22 @@
         </div>
         <div id="comments">
             <h2>Komentáře</h2>
+            <div class="comment_box">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="header">
+                        <span class="date">{{comment[1]}}</span>
+                        <h3 id="comment_{{comment[0]}}"><a href="{{ request.path }}#comment_{{comment[0]}}">{{comment[2]}}</a></h3>
+                    </div>
+                    <p class="comment_text">{{comment[3]}}</p>
+                </div>
+            {% endfor %}
+            </div>
             <form action="#comments" method="post">
                 <label for="firstname" id="firstname_label">First name</label><br/>
-                <input type="text" id="firstname" name="firstname" /><br/>
+                <input type="text" id="firstname" name="firstname" placeholder="Nevyplňovat"/><br/>
                 <label for="name" id="name_label">Jméno</label><br/>
-                <input type="text" id="name" name="firstname" /><br/>
+                <input type="text" id="name" name="name" /><br/>
                 <label for="comment" id="comment_label">Komentář</label><br/>
                 <textarea id="comment" name="comment" rows="4" cols="50"></textarea><br/>
                 <input type="submit" value="Odeslat">

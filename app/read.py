@@ -41,16 +41,39 @@ def read_activity_map(activity_id):
     return list_polyline
 
 
+def read_comments(activity_id):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database)
+    cursor = db.cursor()
+    # cursor.execute("SELECT * FROM activities")
+    cursor.execute("SELECT `id`, `date`, `name`, `text` FROM comments WHERE activity_id='%s' "
+                   "order by `date` desc", (activity_id,))
+    data = cursor.fetchall()
+    db.disconnect()
+    return data
+
+
 def read_activities():
     db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
                        database=Credentials.database)
     cursor = db.cursor()
     # cursor.execute("SELECT * FROM activities")
-    cursor.execute("SELECT a.id, `user_id`, `upload_id`, `external_id`, `start_date_local`, `name`, `distance`, "
-                   "`moving_time`, `elapsed_time`, `total_elevation_gain`, `type`, `description`, `total_photo_count`, "
-                   "GROUP_CONCAT(p.id), GROUP_CONCAT(p.url_small), GROUP_CONCAT(p.url_big), GROUP_CONCAT(p.caption) "
+    cursor.execute("SELECT a.id, `user_id`, `upload_id`, `external_id`, `start_date_local`, a.`name`, `distance`,"
+                   "`moving_time`, `elapsed_time`, `total_elevation_gain`, `type`, `description`, `total_photo_count`,"
+                   "t1.p_id, t1.small_p, t1.big_p, t1.caption_p, t2.num_comments "
                    "FROM activities as a "
-                   "LEFT JOIN photos as p ON a.id = p.activity_id group by a.id order by a.start_date_local desc")
+                   "LEFT JOIN ( "
+                   "    SELECT activity_id, GROUP_CONCAT(p.id) as p_id, GROUP_CONCAT(p.url_small) as small_p, "
+                   "    GROUP_CONCAT(p.url_big) as big_p, GROUP_CONCAT(p.caption) as caption_p"
+                   "    FROM photos as p"
+                   "    GROUP by p.activity_id"
+                   ") t1 ON a.id = t1.activity_id "
+                   "LEFT JOIN ( "
+                   "    SELECT activity_id, COUNT(distinct c.id) AS num_comments"
+                   "    FROM comments as c"
+                   "   GROUP by c.activity_id"
+                   ") t2 ON a.id = t2.activity_id order by a.start_date_local desc ")
+
     data = cursor.fetchall()
     # format output
     for i, val in enumerate(data):
@@ -74,6 +97,16 @@ def read_activities_map():
         list_polyline.append(d[0])
     db.disconnect()
     return list_polyline
+
+
+def add_comment(activity_id, name, text):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database)
+    cursor = db.cursor()
+    cursor.execute("INSERT INTO comments (`activity_id`, `date`, `name`, `text`) VALUES (%s, %s, %s, %s)",
+                   (activity_id, datetime.datetime.now(), name, text))
+    db.commit()
+    db.disconnect()
 
 
 def update_photos(user_id, cursor, headers):
