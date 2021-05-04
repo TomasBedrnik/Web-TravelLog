@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -7,14 +8,14 @@
     <script src="{{ url_for('static', filename='external/smartphoto.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='external/smartphoto.min.css') }}">
 
-    <script type="text/javascript" src="{{ url_for('static', filename='external/Polyline.encoded.js') }}"></script>
+    <script src="{{ url_for('static', filename='external/Polyline.encoded.js') }}"></script>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
-    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 
-    <script type="text/javascript" src="https://api.mapy.cz/loader.js"></script>
-    <script type="text/javascript">Loader.load();</script>
-    <script type="text/javascript" src="{{ url_for('static', filename='mapycz.js') }}"></script>
+    <script src="https://api.mapy.cz/loader.js"></script>
+    <script>Loader.load();</script>
+    <script src="{{ url_for('static', filename='mapycz.js') }}"></script>
 
     <title>Mapa</title>
 </head>

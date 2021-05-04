@@ -1,10 +1,10 @@
 #page {position:absolute;top:0;left:0;width:100%;height:100%;}
 
 #activities {width: 30em;height:100%;float: left;overflow: scroll; overflow-x:hidden;background-color:#bcbcbc}
-.activity {border:1px solid #676767;border-radius:0.2em; background-color:white;margin:0.3em;}
-.activity_name {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:0.2em;border-top-right-radius:0.2em;}
+.activity {border:1px solid #676767;border-radius:5px; background-color:white;margin:0.3em;}
+.activity_name {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:4px;border-top-right-radius:4px;}
 .activity_name a {color:black;font-weight:normal;display: inline-block;}
-.activity_name .date{width:7em;font-size:50%;display: inline-block;}
+.activity_name .date{width:7em;font-size:60%;display: inline-block;}
 .activity .images {margin:0.4em;}
 .activity img {height:5em;}
 .big_map {overflow: hidden;height:100%;touch-action:none;}
@@ -25,7 +25,7 @@
 .info_item{display: inline-block;}
 .info_value{position:relative;top:0.6em;}
 .info_caption {float:left;width:1em;font-size:50%}
-.activity_link {max-width:80%;}
+.activity_link {max-width:75%;}
 /* checkbox hack */
 .activity_description input[type="checkbox"] {display:none;}
 .activity_description label {color:blue; text-decoration:underline; cursor:pointer; display:inline-block;width:100%; text-align:right;}
@@ -37,8 +37,33 @@
 a.zoom {float:right;}
 a.zoom img {height:1.1em;}
 
-#single_activity {float:left;height:100%;width:60em;overflow-y: scroll;}
-#right_column {display: flex; flex-flow: column; height: 100%;}
-.small_map {margin:0.5em;flex:auto;}
-#right_column  .images {margin:0.5em;}
+#single_activity {float:left;height:100%;width:60em;overflow-y: auto;background-color:#bcbcbc;}
+#right_column {display: flex; flex-flow: column; height: 100%;background-color:#bcbcbc;}
+.small_map {margin:0.5em;flex:auto;border:1px solid #676767;border-radius:5px;; }
+#right_column  .images {margin:0.5em;background:white;border:1px solid #676767;border-radius:5px; padding:0.5em;}
 #right_column  .images img {height:15em;}
+.comment {border:1px solid #676767;border-radius:5px; background-color:white;margin:0.3em;}
+
+.comment p {text-indent: 2em; margin: 0;}
+.comment p:first-of-type {text-indent: 0em; margin-top:1em;}
+.header {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:4px;border-top-right-radius:4px;background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
+.header a {color:black;font-weight:normal;display: inline-block;}
+.header .date{width:7em;font-size:60%;display: inline-block;}
+.header h3 {display:inline;}
+.comment_text {margin:1em;}
+#headline_box {border:1px solid #676767;border-radius:5px; background-color:white;margin:2em 0.3em 0.3em 0.3em;padding:0.5em;}
+#headline_box h2 {margin:0;padding:0.2em 0.5em 0.2em 0.5em}
+#comments form {border:1px solid #676767;border-radius:5px; background-color:white;margin:0 0.3em 0.3em 0.3em;padding:0 0.5em 0.5em 0.5em;}
+#name, #comment {margin-left:2em;}
+#comment {width:72em;height:15em;}
+#submit {margin-top:2em;}
+#name {margin-bottom:1em;}
+a.back {font-size:150%;background-color:#377eb8;display:block;margin:0.4em;padding:0.2em;width:15em;text-align:center;border:1px solid #676767;border-radius:5px;color:white;float:right;}
+#whole_info {border:1px solid #676767;border-radius:5px;margin:4em 0.5em 0.5em 0.5em;background-color:white;}
+.single_activity_description {margin: 0.5em;}
+.single_activity_description p {text-indent: 2em; margin: 0;}
+.single_activity_description p:first-of-type {text-indent: 0em; margin-top:1em;}
+#single_activity_name {font-size:1em;background-color:#ebebeb;margin:0;padding:0.3em;border-bottom:1px solid #676767;border-top-left-radius:5px;border-top-right-radius:5px;background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8);}
+#single_activity_name .date{width:7em;font-size:100%;display: inline-block; vertical-align:top;}
+#single_activity_name h1 {display: inline-block; width:85%;margin:0;}
+#firstname_label, #firstname {font-size:0;border:0;margin:0;padding:0;}
