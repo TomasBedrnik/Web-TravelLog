@@ -11,16 +11,33 @@
 
     <script src="{{ url_for('static', filename='external/Polyline.encoded.js') }}"></script>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_1.css') }}"/>
 
     <script src="https://api.mapy.cz/loader.js"></script>
     <script>Loader.load();</script>
     <script src="{{ url_for('static', filename='mapycz.js') }}"></script>
-    <title>{{content[5]}}</title>
+    <title>Zuzka jde kolem republiky - {{content[5]}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    {% if content[14] is not none %}
+        <style>
+            {% set images_small = content[14].split(",") %}
+            {% set images_big = content[15].split(",") %}
+            {% set images_caption = content[16].split(",") %}
+            #page_single:before {
+              background: url({{images_big[0]}}) no-repeat center center fixed;
+              -webkit-background-size: cover;
+              -moz-background-size: cover;
+              -o-background-size: cover;
+              background-size: cover;
+            }
+        </style>
+    {% endif %}
 </head>
 
 <body>
-<div id="page">
+<div id="page_single">
     <div id="single_activity">
         <a class="back" href="/map">Zpět na celou mapu</a>
         <div id="whole_info">
@@ -31,10 +48,11 @@
             <div class="activity_info">
                 <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[6]/1000)}} km</span>
                 </div>
-                <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[8]}}</span>
-                </div>
                 <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{content[7]}}</span>
                 </div>
+                <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[8]}}</span>
+                </div>
+                <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(content[9]/1000)}} km</span></div>
             </div>
             <div class="single_activity_description">
                 {% set text = content[11].split('\n') %}
@@ -64,20 +82,20 @@
             {% endfor %}
             </div>
             <form action="#comments" method="post">
-                <label for="firstname" id="firstname_label">First name</label><br/>
-                <input type="text" id="firstname" name="firstname" placeholder="Nevyplňovat"/><br/>
                 <label for="name" id="name_label">Jméno</label><br/>
-                <input type="text" id="name" name="name" /><br/>
+                <input type="text" tabindex="1" id="name" name="name" /><br/>
+                <label for="text" id="text_label">Comment</label><br/>
+                <textarea id="text" name="text" rows="10" cols="50"></textarea><br/>
                 <label for="comment" id="comment_label">Komentář</label><br/>
-                <textarea id="comment" name="comment" rows="10" cols="50"></textarea><br/>
-                <input type="submit" id="submit" value="Odeslat">
+                <textarea id="comment" tabindex="2" name="comment" rows="10" cols="50"></textarea><br/>
+                <input type="submit" tabindex="3" id="submit" value="Odeslat">
             </form>
         </div>
     </div>
-    <div id="right_column">
+    <div id="images_container">
 
         {% if content[14] is not none %}
-        <div class="images">
+        <div id="single_images">
             {% set images_small = content[14].split(",") %}
             {% set images_big = content[15].split(",") %}
             {% set images_caption = content[16].split(",") %}
@@ -86,9 +104,9 @@
                     src="{{images_small[i]}}" alt=""/></a>
             {% endfor %}
         </div>
-        {% endif %}
-        <div id="map" class="small_map"></div>
     </div>
+        {% endif %}
+    <div id="map" class="small_map"></div>
     <script>
         window.addEventListener("load", add_mapycz_single({{polylines|safe}}));
         window.addEventListener('DOMContentLoaded', function () { new SmartPhoto(".js-smartPhoto"); });

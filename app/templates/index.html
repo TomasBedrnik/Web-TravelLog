@@ -2,11 +2,87 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aloha</title>
+    <title>Zuzka jde kolem republiky</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main_1.css') }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
-<body>
-<h1>Aloha</h1>
-<p>It is working</p>
+<body id="index">
+<div id="column">
+    <main>
+        <h1>Zuzka jde kolem republiky</h1>
+        <a id="link_to_map" href="/map">Mapa s trasou</a>
+        {% if content is not none %}
+        <div class="activity_info" id="main_activity_info">
+            <div class="info_item"><span class="info_caption">Plánovaná vzdálenost</span><span class="info_value">1693 km</span></div>
+            <div class="info_item"><span class="info_caption">Ujitá vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[0]/1000)}} km</span></div>
+            <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{content[1]}}</span></div>
+            <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[2]}}</span></div>
+            <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(content[03]/1000)}} km</span></div>
+        </div>
+        {% endif %}
+        <div id="main_img"><img src="{{ url_for('static', filename='zuzka.jpg') }}" alt="foto"/></div>
+        <p>Už nějakou dobu jsem měla v hlavě plán obejít republiku kolem hranic. Teď se to stalo velice populární díky
+            dvěma projektům - <a href="https://viaczechia.cz/">Via Czechia</a> a
+            <a href="https://www.stezkaceskem.cz/">Stezka Českem</a>.
+            Můj nápad ale vznikl ještě před těmito „masovými“ akcemi.</p>
+        <p>Startuju 22. 5. 2021 na Rezku. Můj postup můžete sledovat na <a href="/map">mapě</a>,
+            kam se budou automaticky každé ráno přidávat mé prošlé trasy.
+            Ráno proto, aby nebylo úplně vidět kde spím než otamtud zmizím. Bílá čára značí naplánovanou trasu.
+            Pravděpodobně se od trasy místy odchýlím. Každá část trasy jde rozkliknout nebo při najetí na nadpis se zvýrazní část na mapě.</p>
+        <p>Po částech už jsem absolvovala už několik cest po Čechách:</p>
+        <ul>
+            <li>Krušné hory</li>
+            <li>Orlické hory</li>
+            <li>Šumavu</li>
+            <li>Jižní čechy</li>
+            <li>Sázavu - od premene k soutoku</li>
+            <li>Železné hory</li>
+            <li>Broumovsko</li>
+            <li>Lužické hory</li>
+            <li>Český ráj</li>
+        </ul>
+        <p>A v zahraničí:</p>
+        <ul>
+            <li>Portugalskou část Santiago de Compostela - z Lisabonu do Porta</li>
+            <li>GR 20 na Korsice</li>
+            <li>přechod Rily a Pirinu v Bulharsku</li>
+            <li>cestu napříč Rumunským krasem</li>
+            <li>a další</li>
+        </ul>
+        <p>Jdu relativně na lehko, batoh bez jídla a vody má 9,5 kg. Spát budu na volno ve stanu, pod tarpem a jednou za čas v penzinu nebo kempu.</p>
+        <div id="comments">
+            <h2>Komentáře</h2>
+            <div class="comment_box">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="header">
+                        <span class="date">{{comment[1].strftime('%d. %m. %Y %H:%M')}}</span>
+                        <h3 id="comment_{{comment[0]}}"><a href="{{ request.path }}#comment_{{comment[0]}}">{{comment[2]}}</a></h3>
+                    </div>
+                    {% set text = comment[3].split('\n') %}
+                    <div class="comment_text">
+                        {% for para in text %}
+                            <p>{{para|urlize(40, true)}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            <form action="#comments" method="post">
+                <label for="name" id="name_label">Jméno</label><br/>
+                <input type="text" tabindex="1" id="name" name="name" /><br/>
+                <label for="text" id="text_label">Comment</label><br/>
+                <textarea id="text" name="text" rows="10" cols="50"></textarea><br/>
+                <label for="comment" id="comment_label">Komentář</label><br/>
+                <textarea id="comment" tabindex="2" name="comment" rows="10" cols="50"></textarea><br/>
+                <input type="submit" tabindex="3" id="submit" value="Odeslat">
+            </form>
+        </div>
+    </main>
+    <footer>Web běží na jednoduché aplikaci <a href="https://github.com/TomasBedrnik/Web-TravelLog">Web-TravelLog</a>, která automaticky stahuje prošlou trasu a fotky ze <a href="https://strava.com">Stravy</a></footer>
+</div>
 </body>
 </html>
