@@ -42,7 +42,8 @@ cursor.execute("SHOW TABLES like 'photos'")
 result = cursor.fetchone()
 if not result:
     cursor.execute("CREATE TABLE `photos` "
-                   "(`id` varchar(255) NOT NULL PRIMARY KEY,"
+                   "(`id` varchar(255) NOT NULL PRIMARY KEY,"                   
+                   "`photo_order` bigint NOT NULL AUTO_INCREMENT,"
                    "`activity_id` bigint NOT NULL,"
                    "`caption` text NOT NULL,"
                    "`url_small` varchar(255) NOT NULL,"
