@@ -19,7 +19,7 @@
 
             </div>
 
-        {% set count = namespace(value=0) %}
+        {% set count = namespace(value=content|length - 1 % 8) %}
         {% set count2 = namespace(value=0) %}
         {% for d in content %}
             <div class="activity activity_{{count.value}}" id="activity_{{count2.value}}">
@@ -59,10 +59,10 @@
                       </div>
                   {% endif %}
             </div>
-          {% set count.value = count.value + 1 %}
+          {% set count.value = count.value - 1 %}
           {% set count2.value = count2.value + 1 %}
-          {% if count.value >= 8 %}
-            {% set count.value = 0 %}
+          {% if count.value < 0 %}
+            {% set count.value = 7 %}
           {% endif %}
         {% endfor %}
       </div>

@@ -52,11 +52,13 @@ function add_mapycz_single(polyline) {
     m.setZoom(zoomCoords[1], zoomCoords[0], true);
 
     let options = {
-        color: '#e41a1c',
-        width: 3,
+        color: 'black',
+        width: 1,
         opacity: 1,
-        outlineColor: 'black',
-        outlineWidth: 1
+        style: JAK.Vector.STYLE_DASH,
+        outlineColor: "#377eb8",
+        outlineWidth: 2,
+        outlineOpacity: 1
     };
     let line = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, array_coordinates, options);
     layer.addGeometry(line);
@@ -111,7 +113,7 @@ function add_mapycz(polylines) {
     let p = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, planned_array_coordinates, options);
     layer.addGeometry(p);
 
-
+    let colour_iterator = 0;
     for (let y = polylines.length - 1; y >= 0; y--) {
         let coordinates = L.Polyline.fromEncoded(polylines[y]).getLatLngs();
         array_coordinates[y] = [];
@@ -121,11 +123,13 @@ function add_mapycz(polylines) {
 
         /* "title", "minDist", "color", "opacity", "width", "style", "outlineColor", "outlineOpacity", "outlineWidth", "outlineStyle" */
         let options = {
-            color: colours[y % 8],
-            width: 3,
+            color: 'black',
+            width: 1,
             opacity: 1,
-            outlineColor: 'black',
-            outlineWidth: 1
+            style: JAK.Vector.STYLE_DASH,
+            outlineColor: colours[colour_iterator++ % 8],
+            outlineWidth: 2,
+            outlineOpacity: 1
         };
         let polyline = new SMap.Geometry(SMap.GEOMETRY_POLYLINE, null, array_coordinates[y], options);
         geometryIds[y] = polyline.getId();
@@ -139,7 +143,7 @@ function add_mapycz(polylines) {
         /* Highlight activity on mouse hover */
         activities[i].addEventListener("mouseenter", function (event) {
             let options = {
-                color: colours[i % 8],
+                color: colours[((activities.length - 1 % 8) - i) % 8],
                 width: 10,
                 opacity: 1,
                 outlineColor: 'black',
