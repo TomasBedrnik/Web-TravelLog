@@ -14,3 +14,4 @@ class Credentials:
     user = "dbUser"
     passwd = "dbPasswd"
     database = "dbName"
+    webpushr_key = "your_webpushr_key_from_webpushr.com"
