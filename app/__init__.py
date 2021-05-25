@@ -5,40 +5,58 @@ from flask import abort
 from flask import redirect
 from flask import render_template
 from flask import jsonify
-import requests
 from credentials import Credentials
 import mysql.connector as mysql
 from app import auth
 from app import read
 from datetime import datetime
 
-def create_app():
-    app = Flask(__name__)
+import os
+import time
+os.environ['TZ'] = 'Europe/Prague'
+time.tzset()
 
-    @app.route('/')
+
+def create_app():
+    app = Flask(__name__, static_url_path='', static_folder='static')
+
+    @app.route('/', methods=['GET', 'POST'])
     def hello_world():
-        return render_template("index.html")
+        if request.method == 'POST':
+            # Simple anti spam honeypot
+            if request.form["text"] != "":
+                return "We Don't Serve Robots!"
+            elif request.form["name"] == "" or request.form["comment"] == "":
+                return "Prázdné jméno nebo text komentáře, neuloženo."
+            else:
+                # TODO: Sanitize data
+                name = request.form["name"]
+                text = request.form["comment"]
+                read.add_comment(0, name, text)
+                return redirect("/#comments")
+
+        else:
+            return render_template("index.html", content=read.read_stats(), comments=read.read_comments(0))
 
     @app.route('/map')
     def show_map():
-        return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map())
-
-    @app.route('/mapycz')
-    def show_mapycz():
-        return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map())
+        return render_template("mapycz.html", content=read.read_activities(), polylines=read.read_activities_map(),
+                               stats=read.read_stats())
 
     @app.route('/activity/<int:activity_id>', methods=['GET', 'POST'])
     def show_activity(activity_id):
         if request.method == 'POST':
             # Simple anti spam honeypot
-            if request.form["firstname"] != "":
+            if request.form["text"] != "":
                 return "We Don't Serve Robots!"
+            elif request.form["name"] == "" or request.form["comment"] == "":
+                return "Prázdné jméno nebo text komentáře, neuloženo."
             else:
                 # TODO: Sanitize data
                 name = request.form["name"]
                 text = request.form["comment"]
                 read.add_comment(activity_id, name, text)
-                return redirect("/activity/"+str(activity_id)+"#comments")
+                return redirect("/activity/" + str(activity_id) + "#comments")
 
         else:
             return render_template("activity.html", content=read.read_activity(activity_id),
@@ -87,7 +105,7 @@ def create_app():
             # verify_token = request.args.get('hub.verify_token ')
             data = {
                 "hub.challenge": challenge
-                }
+            }
             return jsonify(data), 200
         elif request.method == 'POST':
             request_data = request.get_json()
