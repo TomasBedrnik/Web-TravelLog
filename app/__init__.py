@@ -78,8 +78,8 @@ def create_app():
                 text = request.form["comment"]
                 read.add_comment(activity_id, name, text)
                 send_notification("Nový komentář na ZuzkaJde.cz", name + ": " + text,
-                                  "https://zuzkajde.cz/activity/" + str(activity_id) + "#comments")
-                return redirect("/activity/" + str(activity_id) + "#comments")
+                                  "https://zuzkajde.cz/activity/" + str(activity_id))
+                return redirect("/activity/" + str(activity_id))
 
         else:
             return render_template("activity.html", content=read.read_activity(activity_id),
