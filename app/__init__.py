@@ -11,14 +11,34 @@ from app import auth
 from app import read
 from datetime import datetime
 
+import requests
 import os
 import time
 os.environ['TZ'] = 'Europe/Prague'
 time.tzset()
 
 
+def send_notification(title, message, target_url):
+    headers = {
+        'webpushrKey': Credentials.webpushr_REST_API_key,
+        'webpushrAuthToken': Credentials.webpushr_REST_API_authentication_token,
+        'Content-Type': 'application/json',
+    }
+
+    data = '{"title":"'+title+'","message":"'+message+'","target_url":"'+target_url+'"}'
+
+    response = requests.post('https://api.webpushr.com/v1/notification/send/all', headers=headers,
+                             data=data.encode('utf-8'))
+    print(response)
+    print(response.text)
+
+
 def create_app():
     app = Flask(__name__, static_url_path='', static_folder='static')
+
+    @app.context_processor
+    def inject_stage_and_region():
+        return dict(webpushr_key=Credentials.webpushr_key)
 
     @app.route('/', methods=['GET', 'POST'])
     def hello_world():
@@ -33,6 +53,7 @@ def create_app():
                 name = request.form["name"]
                 text = request.form["comment"]
                 read.add_comment(0, name, text)
+                send_notification("Nový komentář na ZuzkaJde.cz", name+": "+text, "https://zuzkajde.cz/#comments")
                 return redirect("/#comments")
 
         else:
@@ -56,6 +77,8 @@ def create_app():
                 name = request.form["name"]
                 text = request.form["comment"]
                 read.add_comment(activity_id, name, text)
+                send_notification("Nový komentář na ZuzkaJde.cz", name + ": " + text,
+                                  "https://zuzkajde.cz/activity/" + str(activity_id) + "#comments")
                 return redirect("/activity/" + str(activity_id) + "#comments")
 
         else:

@@ -94,23 +94,24 @@
     </div>
     <div id="images_container">
 
-        {% if content[14] is not none %}
         <div id="single_images">
-            {% set images_small = content[14].split(",") %}
-            {% set images_big = content[15].split(",") %}
-            {% set images_caption = content[16].split(",") %}
-            {% for i in range(images_small|length) %}
-            <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img
-                    src="{{images_small[i]}}" alt=""/></a>
-            {% endfor %}
+            {% if content[14] is not none %}
+                {% set images_small = content[14].split(",") %}
+                {% set images_big = content[15].split(",") %}
+                {% set images_caption = content[16].split(",") %}
+                {% for i in range(images_small|length) %}
+                <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img
+                        src="{{images_small[i]}}" alt=""/></a>
+                {% endfor %}
+            {% endif %}
         </div>
     </div>
-        {% endif %}
     <div id="map" class="small_map"></div>
     <script>
         window.addEventListener("load", add_mapycz_single({{polylines|safe}}));
         window.addEventListener('DOMContentLoaded', function () { new SmartPhoto(".js-smartPhoto"); });
     </script>
 </div>
+{% include 'footer.html' %}
 </body>
 </html>
