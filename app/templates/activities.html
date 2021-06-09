@@ -2,67 +2,77 @@
     <a id="hide" href="#a">&lt;&lt; Schovat</a>
     <a id="show" href="#">&gt;&gt; Ukázat</a>
     <div id="activity_planned">
-                <div class="activity_name" id="planned_activity">
-                    <a class="activity_link" href="/">Plánovaná trasa</a>
+        <div class="activity_name" id="planned_activity">
+            <a class="activity_link" href="/">Plánovaná trasa</a>
+        </div>
+        {% if stats is not none %}
+            <div class="activity_info">
+                <div class="info_item"><span class="info_caption">Plánovaná vzdálenost</span><span class="info_value">1693 km</span>
                 </div>
-                {% if stats is not none %}
-                <div class="activity_info">
-                    <div class="info_item"><span class="info_caption">Plánovaná vzdálenost</span><span class="info_value">1693 km</span></div>
-                    <div class="info_item"><span class="info_caption">Ujitá vzdálenost</span><span class="info_value">{{'%0.1f'|format(stats[0]/1000)}} km</span></div>
-                    <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(stats[3]/1000)}} km</span></div>
-                    <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{stats[1]}}</span></div>
-                    <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{stats[2]}}</span></div>
-                </div>
-
-            {% endif %}
-            <div class="activity_description"><a href="/" id="link_to_main">Zpět na hlavní stranu</a></div>
-
+                <div class="info_item"><span class="info_caption">Ujitá vzdálenost</span><span
+                        class="info_value">{{ '%0.1f'|format(stats[0]/1000)|replace(".",",") }} km</span></div>
+                <div class="info_item"><span class="info_caption">Nastoupáno</span><span
+                        class="info_value">{{ '%0.2f'|format(stats[3]/1000)|replace(".",",") }} km</span></div>
+                <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span
+                        class="info_value">{{ stats[1] }}</span></div>
+                <div class="info_item"><span class="info_caption">Čas</span><span
+                        class="info_value">{{ stats[2] }}</span></div>
             </div>
 
-        {% set count = namespace(value=content|length - 1 % 8) %}
-        {% set count2 = namespace(value=0) %}
-        {% for d in content %}
-            <div class="activity activity_{{count.value}}" id="activity_{{count2.value}}">
-                <div class="activity_name">
-                    <div class="date">{{d[4].strftime('%d. %m. %Y %H:%M')}}</div>
-                    <a class="activity_link" href="/activity/{{d[0]}}">{{d[5]}}</a>
-                    <a class="zoom" href="#">
-                        <img src="{{ url_for('static', filename='external/images/zoom-in-fill.png') }}"
-                             alt="Přiblížit" />
-                    </a>
-                </div>
-                <div class="activity_info">
-                    <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(d[6]/1000)}} km</span></div>
-                    <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{d[7]}}</span></div>
-                    <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{d[8]}}</span></div>
-                    <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(d[9]/1000)}} km</span></div>
-                    <div class="info_item"><span class="info_caption">Komentáře</span><span class="info_value"><a href="/activity/{{d[0]}}">{{d[17] or 0}}</a></a></span></div>
-                </div>
-                  <div class="activity_description">
-                      <input type="checkbox" id="readmore_{{count2.value}}" />
-                      {% set text = d[11].split('\n') %}
-                      <div class="activity_description_inner">
-                        {% for para in text %}
-                            <p>{{para|urlize(40, true)}}</p>
-                        {% endfor %}
-                      </div>
-                      <label class="more_label" for="readmore_{{count2.value}}">Zobrazit </label>
-                  </div>
-                  {% if d[14] is not none  %}
-                      <div class="images">
-                          {% set images_small = d[14].split(",") %}
-                          {% set images_big = d[15].split(",") %}
-                          {% set images_caption = d[16].split(",") %}
-                          {% for i in range(images_small|length) %}
-                              <a href="{{images_big[i]}}" class="js-smartPhoto" data-caption="{{images_caption[i]}}"><img src="{{images_small[i]}}" alt=""/></a>
-                          {% endfor %}
-                      </div>
-                  {% endif %}
+        {% endif %}
+        <div class="activity_description"><a href="/" id="link_to_main">Zpět na hlavní stranu</a></div>
+        <div class="activity_end"></div>
+    </div>
+
+    {% set count = namespace(value=content|length - 1) %}
+    {% set count.value = count.value % 8 %}
+    {% set count2 = namespace(value=0) %}
+    {% for d in content %}
+        <div class="activity activity_{{ count.value }}" id="activity_{{ count2.value }}">
+            <div class="activity_name">
+                <div class="date">{{ d[4].strftime('%d. %m. %Y %H:%M') }}</div>
+                <a class="activity_link" href="/activity/{{ d[0] }}">{{ d[5] }}</a>
+                <a class="zoom" href="#">
+                    <img src="{{ url_for('static', filename='external/images/zoom-in-fill.png') }}"
+                         alt="Přiblížit"/>
+                </a>
             </div>
-          {% set count.value = count.value - 1 %}
-          {% set count2.value = count2.value + 1 %}
-          {% if count.value < 0 %}
+            <div class="activity_info">
+                <div class="info_item"><span class="info_caption">Vzdálenost</span><span
+                        class="info_value">{{ '%0.1f'|format(d[6]/1000)|replace(".",",") }} km</span></div>
+                <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span
+                        class="info_value">{{ d[7] }}</span></div>
+                <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{ d[8] }}</span>
+                </div>
+                <div class="info_item"><span class="info_caption">Nastoupáno</span><span
+                        class="info_value">{{ '%0.2f'|format(d[9]/1000)|replace(".",",") }} km</span></div>
+                <div class="info_item"><span class="info_caption">Komentáře</span><span class="info_value"><a
+                        href="/activity/{{ d[0] }}">{{ d[17] or 0 }}</a></span></div>
+            </div>
+            <div class="activity_description">
+                {% set text = d[11].split('\n') %}
+                <div class="activity_description_inner">
+                    <p>{{ text[0]|urlize(40, true) }}</p>
+                    <a href="/activity/{{ d[0] }}">Celý popis</a>
+                </div>
+            </div>
+            <div class="images">
+                {% if d[14] is not none %}
+                    {% set images_small = d[14].split(",") %}
+                    {% set images_big = d[15].split(",") %}
+                    {% set images_caption = d[16].split(",") %}
+                    {% for i in range(images_small|length) %}
+                        <a href="{{ images_big[i] }}" class="js-smartPhoto" data-caption="{{ images_caption[i] }}"><img
+                                src="{{ images_small[i] }}" alt=""/></a>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="activity_end"></div>
+        </div>
+        {% set count.value = count.value - 1 %}
+        {% set count2.value = count2.value + 1 %}
+        {% if count.value < 0 %}
             {% set count.value = 7 %}
-          {% endif %}
-        {% endfor %}
-      </div>
+        {% endif %}
+    {% endfor %}
+</div>

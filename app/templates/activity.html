@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    {% include 'head' %}
+    <title>Zuzka jde kolem republiky - {{content[5]}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}"/>
+
 
     <script src="{{ url_for('static', filename='external/leaflet.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='external/leaflet.css') }}"/>
@@ -11,15 +14,9 @@
 
     <script src="{{ url_for('static', filename='external/Polyline.encoded.js') }}"></script>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='main_1.css') }}"/>
-
     <script src="https://api.mapy.cz/loader.js"></script>
     <script>Loader.load();</script>
     <script src="{{ url_for('static', filename='mapycz.js') }}"></script>
-    <title>Zuzka jde kolem republiky - {{content[5]}}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     {% if content[14] is not none %}
         <style>
             {% set images_small = content[14].split(",") %}
@@ -46,13 +43,13 @@
                 <h1>{{content[5]}}</h1>
             </div>
             <div class="activity_info">
-                <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[6]/1000)}} km</span>
+                <div class="info_item"><span class="info_caption">Vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[6]/1000)|replace(".",",")}} km</span>
                 </div>
                 <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{content[7]}}</span>
                 </div>
                 <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[8]}}</span>
                 </div>
-                <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(content[9]/1000)}} km</span></div>
+                <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(content[9]/1000)|replace(".",",")}} km</span></div>
             </div>
             <div class="single_activity_description">
                 {% set text = content[11].split('\n') %}
@@ -92,7 +89,6 @@
             </form>
         </div>
     </div>
-    <div id="images_container">
 
         <div id="single_images">
             {% if content[14] is not none %}
@@ -105,7 +101,7 @@
                 {% endfor %}
             {% endif %}
         </div>
-    </div>
+
     <div id="map" class="small_map"></div>
     <script>
         window.addEventListener("load", add_mapycz_single({{polylines|safe}}));

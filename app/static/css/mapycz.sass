@@ -1,0 +1,216 @@
+@import "common"
+@import "activity_info"
+@import "comments"
+
+// hide scrollbar because of hidden elements
+body
+  overflow: hidden
+
+#a
+  width: 30em
+  max-height: 100%
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 10
+  overflow: auto
+  overflow-x: hidden
+  background: none
+  direction: rtl
+  padding: 0 1em 0 0em
+  transition: left 1s ease-in 0s
+
+  *
+    direction: ltr
+
+#hide
+  background-color: #003eb1
+  color: white
+  text-decoration: none
+  font-weight: bold
+  position: absolute
+  right: 0em
+  top: 0
+  border: $border_grey
+  border-radius: $border_radius
+  padding: 0.5em
+
+#show
+  display: none
+
+#a:target
+  position: absolute
+  left: -25em
+  overflow: hidden
+
+  #hide
+    display: none
+
+  #show
+    display: block
+    background-color: #620002
+    color: white
+    text-decoration: none
+    font-weight: bold
+    position: absolute
+    right: 0em
+    top: 0
+    border: $border_grey
+    border-radius: $border_radius
+    padding: 0.5em
+
+.activity, #activity_planned
+  border: none
+  border-radius: $border_radius
+  margin: 10px 20px 5px 5px
+  box-shadow: 0px 0px 10px #000000
+
+.activity_name
+  font-size: 1em
+  margin: 0
+  padding: 0.3em
+  border: $border_grey
+  border-top-left-radius: $border_radius
+  border-top-right-radius: $border_radius
+
+  a
+    font-weight: normal
+    display: inline-block
+
+  .date
+    width: 7em
+    font-size: 60%
+    display: inline-block
+
+.activity
+  .images
+    padding: 0.4em
+    max-height: 10.2em
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-evenly
+    overflow: auto
+    margin: 0 0 -1px 0
+    background: white
+    border-left: $border_grey
+    border-right: $border_grey
+
+  img
+    height: 5em
+    border: $border_grey
+
+.activity_end
+  background: white
+  height: 2*$border_radius
+  border-bottom: $border_grey
+  border-left: $border_grey
+  border-right: $border_grey
+  border-bottom-left-radius: $border_radius
+  border-bottom-right-radius: $border_radius
+
+.big_map
+  overflow: hidden
+  height: 100%
+  touch-action: none
+
+#planned_activity
+  background-image: linear-gradient(to right, #ebebeb , #55ffff)
+
+.activity_0 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_0)
+
+.activity_1 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_1)
+
+.activity_2 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_2)
+
+.activity_3 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_3)
+
+.activity_4 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_4)
+
+.activity_5 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_5)
+
+.activity_6 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_6)
+
+.activity_7 .activity_name
+  background-image: linear-gradient(to right, #ebebeb 75%, $activity_color_7)
+
+.activity_selected
+  background-color: #7AB0FF
+
+  .activity_name
+    background-image: none
+    background-color: #1876FF
+
+.activity_link
+  max-width: 75%
+
+.activity_description
+  padding: 0.4em 0.5em 0 0.5em
+  background: white
+  border-left: $border_grey
+  border-right: $border_grey
+
+.activity_info
+  border-left: $border_grey
+  border-right: $border_grey
+  background: white
+  margin: 0
+  padding: 0.3em
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+
+.info_item
+  display: block
+  padding: 0 0 0.8em 0
+
+.info_caption
+  font-size: 65%
+  position: absolute
+
+.info_value
+  position: relative
+  top: 0.8em
+  padding: 0 0.5em 0 1.5em
+
+#link_to_main
+  display: block
+  font-size: 120%
+  font-weight: bold
+  padding-bottom: 0.5em
+  text-align: center
+
+.activity_description_inner
+  p
+    margin: 0
+    text-indent: 0
+  a
+    display: block
+    padding: 0.5em 1em 0.5em 1em
+    text-align: right
+
+#activity_info_planned
+  padding-bottom: 1em
+
+a.zoom
+  float: right
+
+  img
+    height: 1.1em
+    border: none
+
+@media only screen and (max-width: 700px)
+  #a
+    width: 70%
+
+    &:target
+      left: -50%
+
+  .date
+    width: 100% !important

@@ -72,27 +72,22 @@ def read_stats():
     db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
                        database=Credentials.database, collation="utf8mb4_general_ci")
     cursor = db.cursor()
-    cursor.execute("SELECT SUM(distance), SUM(moving_time), SUM(elapsed_time), SUM(total_elevation_gain) "
+    cursor.execute("SELECT SUM(distance), SUM(moving_time), SUM(elapsed_time), SUM(total_elevation_gain), count(distance) "
                    "FROM `activities` WHERE 1")
 
     data = cursor.fetchone()
     data = list(data)
     data_1_dny = False
-    data_2_dny = False
-    if len(data) > 0 and data[1] and data[2]:
+    if data[2]:
+        data[2] = str(int(data[2]/3600)) + " hodin"
+    if len(data) > 0 and data[1]:
         if data[1] < 4*24*60*60:
             data_1_dny = True
-        if data[2] < 4*24*60*60:
-            data_2_dny = True
 
         data[1] = ':'.join(str(datetime.timedelta(seconds=data[1])).split(':')[:2])
-        data[2] = ':'.join(str(datetime.timedelta(seconds=data[2])).split(':')[:2])
         data[1] = data[1].replace("days", "dní").replace("day", "den")
-        data[2] = data[2].replace("days", "dní").replace("day", "den")
         if data_1_dny:
             data[1] = data[1].replace("dní", "dny")
-        if data_2_dny:
-            data[2] = data[2].replace("dní", "dny")
         db.disconnect()
         return data
 

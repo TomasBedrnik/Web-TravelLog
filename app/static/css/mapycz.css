@@ -1,0 +1,306 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0; }
+
+.activity_info {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+#activity_info_planned {
+  padding-bottom: 1em; }
+
+.activity_info {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; }
+
+.info_item {
+  display: block;
+  padding: 0 0 0.6em 0; }
+
+.info_caption {
+  font-size: 65%;
+  position: absolute; }
+
+.info_value {
+  position: relative;
+  top: 0.6em;
+  padding: 0 0.5em 0 1.5em; }
+
+.activity_info {
+  justify-content: flex-start; }
+
+#comments form {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0 0.3em 0.3em 0.3em;
+  padding: 0 1em 1em 1em; }
+
+#comment {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box; }
+
+#submit {
+  margin-top: 2em; }
+
+#name {
+  margin-bottom: 1em;
+  position: relative;
+  top: 3em; }
+
+#name_label {
+  position: relative;
+  top: 2em; }
+
+#text_label, #text {
+  font-size: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 0; }
+
+.comment_text {
+  margin: 1em; }
+
+.comment {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.3em; }
+  .comment p {
+    text-indent: 2em;
+    margin: 0;
+    line-height: 150%; }
+    .comment p:first-of-type {
+      text-indent: 0em;
+      margin-top: 1em; }
+
+.header {
+  font-size: 1em;
+  background-color: #ebebeb;
+  margin: 0;
+  padding: 0.3em;
+  border-bottom: 1px solid #676767;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8); }
+  .header a {
+    color: black;
+    font-weight: normal;
+    display: inline-block; }
+  .header .date {
+    width: 7em;
+    font-size: 60%;
+    display: inline-block; }
+  .header h3 {
+    display: inline; }
+
+body {
+  overflow: hidden; }
+
+#a {
+  width: 30em;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  overflow: auto;
+  overflow-x: hidden;
+  background: none;
+  direction: rtl;
+  padding: 0 1em 0 0em;
+  transition: left 1s ease-in 0s; }
+  #a * {
+    direction: ltr; }
+
+#hide {
+  background-color: #003eb1;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  position: absolute;
+  right: 0em;
+  top: 0;
+  border: 1px solid #676767;
+  border-radius: 5px;
+  padding: 0.5em; }
+
+#show {
+  display: none; }
+
+#a:target {
+  position: absolute;
+  left: -25em;
+  overflow: hidden; }
+  #a:target #hide {
+    display: none; }
+  #a:target #show {
+    display: block;
+    background-color: #620002;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    position: absolute;
+    right: 0em;
+    top: 0;
+    border: 1px solid #676767;
+    border-radius: 5px;
+    padding: 0.5em; }
+
+.activity, #activity_planned {
+  border: none;
+  border-radius: 5px;
+  margin: 10px 20px 5px 5px;
+  box-shadow: 0px 0px 10px #000000; }
+
+.activity_name {
+  font-size: 1em;
+  margin: 0;
+  padding: 0.3em;
+  border: 1px solid #676767;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+  .activity_name a {
+    font-weight: normal;
+    display: inline-block; }
+  .activity_name .date {
+    width: 7em;
+    font-size: 60%;
+    display: inline-block; }
+
+.activity .images {
+  padding: 0.4em;
+  max-height: 10.2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow: auto;
+  margin: 0 0 -1px 0;
+  background: white;
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767; }
+
+.activity img {
+  height: 5em;
+  border: 1px solid #676767; }
+
+.activity_end {
+  background: white;
+  height: 10px;
+  border-bottom: 1px solid #676767;
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; }
+
+.big_map {
+  overflow: hidden;
+  height: 100%;
+  touch-action: none; }
+
+#planned_activity {
+  background-image: linear-gradient(to right, #ebebeb, #55ffff); }
+
+.activity_0 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #e41a1c); }
+
+.activity_1 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #377eb8); }
+
+.activity_2 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #b3ff00); }
+
+.activity_3 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #984ea3); }
+
+.activity_4 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #ff7f00); }
+
+.activity_5 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #ffff33); }
+
+.activity_6 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #a65628); }
+
+.activity_7 .activity_name {
+  background-image: linear-gradient(to right, #ebebeb 75%, #f781bf); }
+
+.activity_selected {
+  background-color: #7AB0FF; }
+  .activity_selected .activity_name {
+    background-image: none;
+    background-color: #1876FF; }
+
+.activity_link {
+  max-width: 75%; }
+
+.activity_description {
+  padding: 0.4em 0.5em 0 0.5em;
+  background: white;
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767; }
+
+.activity_info {
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767;
+  background: white;
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+.info_item {
+  display: block;
+  padding: 0 0 0.8em 0; }
+
+.info_caption {
+  font-size: 65%;
+  position: absolute; }
+
+.info_value {
+  position: relative;
+  top: 0.8em;
+  padding: 0 0.5em 0 1.5em; }
+
+#link_to_main {
+  display: block;
+  font-size: 120%;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+  text-align: center; }
+
+.activity_description_inner p {
+  margin: 0;
+  text-indent: 0; }
+
+.activity_description_inner a {
+  display: block;
+  padding: 0.5em 1em 0.5em 1em;
+  text-align: right; }
+
+#activity_info_planned {
+  padding-bottom: 1em; }
+
+a.zoom {
+  float: right; }
+  a.zoom img {
+    height: 1.1em;
+    border: none; }
+
+@media only screen and (max-width: 700px) {
+  #a {
+    width: 70%; }
+    #a:target {
+      left: -50%; }
+  .date {
+    width: 100% !important; } }

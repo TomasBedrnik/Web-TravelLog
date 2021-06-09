@@ -1,0 +1,212 @@
+@import "common"
+@import "activity_info"
+@import "comments"
+
+$img_height: 200px
+
+#single_activity .activity_info
+  justify-content: flex-start
+  border-left: $border_grey
+  border-right: $border_grey
+  background: white
+
+
+body
+  overflow: hidden
+  padding: 0 10px 0 0
+#page_single
+  width: 100%
+  height: 100vh
+  overflow: hidden
+  margin: 0
+  padding: 0
+  display: grid
+  justify-content: stretch
+  align-content: stretch
+  grid-template-areas: "main-column photos" "main-column map"
+  grid-template-rows: $img_height + 6*$border_radius 1fr
+  grid-template-columns: auto 1fr
+  grid-row-gap: 6*$border_radius
+
+#single_activity
+  grid-area: main-column
+
+#single_images
+  grid-area: photos
+  overflow-x: auto
+  overflow-y: hidden
+
+.small_map
+  grid-area: map
+
+
+#single_activity
+  float: left
+  height: 100%
+  width: 40em
+  overflow-y: auto
+  direction: rtl
+
+  *
+    direction: ltr
+
+.small_map
+  border: $border_grey
+  border-radius: $border_radius
+  position: relative
+  bottom: 2*$border_radius
+  touch-action: none
+  height: 100% !important //Hack to force height which is otherwise computed by mapy.cz javascript
+
+#single_images
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  margin: 0
+  padding: 0
+  background: white
+  border: $border_grey
+  border-radius: $border_radius
+  position: relative
+  top: 2*$border_radius
+
+  img
+    height: $img_height
+    border: 1px solid #676767
+    margin: $border_radius
+
+.header
+  font-size: 1em
+  background-color: $background_grey
+  margin: 0
+  padding: 0.3em
+  border-bottom: $border_grey
+  border-top-left-radius: $border_radius
+  border-top-right-radius: $border_radius
+  background-image: linear-gradient(to right, $background_grey 75%, $activity_color_1)
+
+  a
+    color: black
+    font-weight: normal
+    display: inline-block
+
+  .date
+    width: 7em
+    font-size: 60%
+    display: inline-block
+
+  h3
+    display: inline
+
+.comment_text
+  margin: 1em
+
+#headline_box
+  border: $border_grey
+  border-radius: $border_radius
+  background-color: white
+  margin: 2em 0.3em 0.3em 0.3em
+  padding: 0.5em
+
+  h2
+    margin: 0
+    padding: 0.2em 0.5em 0.2em 0.5em
+
+
+
+a.back
+  font-size: 150%
+  background-color: $activity_color_1
+  display: block
+  margin: 2*$border_radius
+  padding: 0.2em
+  width: 15em
+  text-align: center
+  border: $border_grey
+  border-radius: $border_radius
+  color: white
+  float: right
+
+#whole_info
+  margin: 4em 0.5em 0.5em 0.5em
+  background: none
+  position: relative
+
+.single_activity_description
+  padding: 0.5em
+  border-left: $border_grey
+  border-right: $border_grey
+  border-bottom: $border_grey
+  border-bottom-left-radius: $border_radius
+  border-bottom-right-radius: $border_radius
+  background: white
+
+  p
+    text-indent: 2em
+    margin: 0
+    line-height: 150%
+
+    &:first-of-type
+      text-indent: 0em
+      margin-top: 1em
+
+#single_activity_name
+  font-size: 1em
+  background-color: $background_grey
+  margin: 0
+  padding: $border_radius
+  border: $border_grey
+  border-top-left-radius: $border_radius
+  border-top-right-radius: $border_radius
+  background-image: linear-gradient(to right, $background_grey 75%, $activity_color_1)
+
+  .date
+    font-size: 100%
+    display: inline-block
+    vertical-align: top
+
+  h1
+    display: inline-block
+    width: 85%
+    margin: 0
+
+@media only screen and (max-width: 800px)
+  a.back
+    float: none
+    margin: 0 auto
+    width: 90vw
+  body
+    overflow: auto
+    height: 100vh
+  #single_activity
+    width: 100%
+  #page_single
+    width: 100%
+    height: auto
+    overflow: auto
+    margin: 0
+    padding: 0
+    display: grid
+    justify-content: stretch
+    align-content: stretch
+    grid-template-areas: "photos" "main-column" "map"
+    grid-template-rows: $img_height + 6*$border_radius auto 70vh
+    grid-template-columns: auto
+    grid-row-gap: 6*$border_radius
+
+
+#page_single:before
+  content: ''
+  position: fixed
+  height: 100%
+  width: 100%
+  display: block
+  z-index: -1
+  background: url(/images/zuzka.jpg) no-repeat center center fixed
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  -o-background-size: cover
+  background-size: cover
+  filter: blur(8px)
+  -webkit-filter: blur(8px)
+  transform: scale(1.1)

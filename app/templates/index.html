@@ -1,29 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    {% include 'head' %}
     <title>Zuzka jde kolem republiky</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='main_1.css') }}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
 </head>
-<body id="index">
+<body>
 <div id="column">
     <main>
         <h1>Zuzka jde kolem republiky</h1>
         <a id="link_to_map" href="/map">Mapa s trasou</a>
         {% if content is not none %}
-        <div class="activity_info" id="main_activity_info">
+        <div class="activity_info--main">
             <div class="info_item"><span class="info_caption">Plánovaná vzdálenost</span><span class="info_value">1693 km</span></div>
-            <div class="info_item"><span class="info_caption">Ujitá vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[0]/1000)}} km</span></div>
-            <div class="info_item"><span class="info_caption">Čas&#160;pohybu</span><span class="info_value">{{content[1]}}</span></div>
+            <div class="info_item"><span class="info_caption">Ujitá vzdálenost</span><span class="info_value">{{'%0.1f'|format(content[0]/1000)|replace(".",",")}} km</span></div>
             <div class="info_item"><span class="info_caption">Čas</span><span class="info_value">{{content[2]}}</span></div>
-            <div class="info_item"><span class="info_caption">Převýšení</span><span class="info_value">{{'%0.2f'|format(content[03]/1000)}} km</span></div>
+            <div class="info_item"><span class="info_caption">Dní na cestě</span><span class="info_value">{{content[4]}}</span></div>
+            <div class="info_item"><span class="info_caption">Nastoupáno</span><span class="info_value">{{'%0.2f'|format(content[3]/1000)|replace(".",",")}} km</span></div>
         </div>
         {% endif %}
-        <div id="main_img"><img src="{{ url_for('static', filename='zuzka.jpg') }}" alt="foto"/></div>
+        <img src="{{ url_for('static', filename='images/zuzka.jpg') }}" alt="foto"/>
         <p>Už nějakou dobu jsem měla v hlavě plán obejít republiku kolem hranic. Teď se to stalo velice populární díky
             dvěma projektům - <a href="https://viaczechia.cz/">Via Czechia</a> a
             <a href="https://www.stezkaceskem.cz/">Stezka Českem</a>.
@@ -52,7 +48,14 @@
             <li>cestu napříč Rumunským krasem</li>
             <li>a další</li>
         </ul>
-        <p>Jdu relativně na lehko, batoh bez jídla a vody má 9,5 kg. Spát budu na volno ve stanu, pod tarpem a jednou za čas v penzinu nebo kempu.</p>
+        <p>Jdu relativně na lehko, batoh bez jídla a vody má 9,5 kg. Spát budu na volno ve stanu, pod tarpem a jednou za čas v penzionu nebo kempu.</p>
+        <h2>Prošlé etapy <a href="/map">(Celá mapa)</a></h2>
+        <div class="stage_list">
+            {% for stage in activities %}
+                <a class="activity_link" href="/activity/{{stage[0]}}">{{stage[5]}}</a> <span class="km">{{'%0.1f'|format(stage[6]/1000)|replace(".",",")}} km</span>
+            {% endfor %}
+        </div>
+
         <div id="comments">
             <h2>Komentáře</h2>
             <div class="comment_box">

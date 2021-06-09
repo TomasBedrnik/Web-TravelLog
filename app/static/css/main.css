@@ -1,0 +1,211 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0; }
+
+.activity_info, .activity_info--main {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+#activity_info_planned {
+  padding-bottom: 1em; }
+
+.activity_info, .activity_info--main {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; }
+
+.info_item {
+  display: block;
+  padding: 0 0 0.6em 0; }
+
+.info_caption {
+  font-size: 65%;
+  position: absolute; }
+
+.info_value {
+  position: relative;
+  top: 0.6em;
+  padding: 0 0.5em 0 1.5em; }
+
+.activity_info, .activity_info--main {
+  justify-content: flex-start; }
+
+#comments form {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0 0.3em 0.3em 0.3em;
+  padding: 0 1em 1em 1em; }
+
+#comment {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box; }
+
+#submit {
+  margin-top: 2em; }
+
+#name {
+  margin-bottom: 1em;
+  position: relative;
+  top: 3em; }
+
+#name_label {
+  position: relative;
+  top: 2em; }
+
+#text_label, #text {
+  font-size: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 0; }
+
+.comment_text {
+  margin: 1em; }
+
+.comment {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.3em; }
+  .comment p {
+    text-indent: 2em;
+    margin: 0;
+    line-height: 150%; }
+    .comment p:first-of-type {
+      text-indent: 0em;
+      margin-top: 1em; }
+
+.header {
+  font-size: 1em;
+  background-color: #ebebeb;
+  margin: 0;
+  padding: 0.3em;
+  border-bottom: 1px solid #676767;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8); }
+  .header a {
+    color: black;
+    font-weight: normal;
+    display: inline-block; }
+  .header .date {
+    width: 7em;
+    font-size: 60%;
+    display: inline-block; }
+  .header h3 {
+    display: inline; }
+
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: url("/images/pozadi.jpg") no-repeat center center fixed;
+  background-size: cover; }
+
+#column {
+  width: 65em;
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background: white;
+  box-shadow: 0px 0px 40px #000000; }
+
+#link_to_map {
+  display: block;
+  text-align: center;
+  width: 10em;
+  height: 6em;
+  line-height: 6em;
+  font-weight: bold;
+  font-size: 130%;
+  margin: 0 auto;
+  vertical-align: center;
+  background: url("/images/cr.jpg") center;
+  background-size: cover; }
+  #link_to_map:hover {
+    background: url("/images/cr_hover.jpg") center;
+    background-size: cover; }
+
+h1 {
+  text-align: center;
+  margin: 1em 0 1em 0; }
+
+main {
+  padding: 0 4em 0 4em; }
+
+footer {
+  text-align: center;
+  background-image: linear-gradient(to bottom, white, #ebebeb);
+  border-radius: 5px;
+  padding: 0.5em;
+  margin: 3em 0 0 0; }
+
+p {
+  text-indent: 2em;
+  margin: 0;
+  line-height: 150%; }
+  p:first-of-type {
+    text-indent: 0em;
+    margin-top: 1em; }
+
+ul + p {
+  text-indent: 0em;
+  margin-top: 1em; }
+
+li {
+  line-height: 130%; }
+
+main > img {
+  float: right;
+  width: 500px;
+  border: 1px solid #676767;
+  margin: 10px; }
+
+.stage_list {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: left;
+  row-gap: 0.2em;
+  column-gap: 1em; }
+
+.km {
+  text-align: right; }
+
+.activity_info--main {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  padding: 10px 10px 30px 10px;
+  font-size: 120%;
+  margin: 2em 0 2em 0;
+  justify-content: space-around; }
+  .activity_info--main .info_item {
+    padding: 0 0 30px 0; }
+  .activity_info--main .info_value {
+    top: 1em; }
+
+@media only screen and (max-width: 700px) {
+  main {
+    padding: 0 1em 0 1em; }
+  #column {
+    width: 100%; }
+  img {
+    position: relative;
+    float: none;
+    width: 95% !important; }
+  .activity_info--main {
+    flex-direction: column; } }
+
+body:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url("/images/cr_hover.jpg"); }

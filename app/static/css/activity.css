@@ -1,0 +1,297 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0; }
+
+.activity_info {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+
+#activity_info_planned {
+  padding-bottom: 1em; }
+
+.activity_info {
+  margin: 0;
+  padding: 0.3em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; }
+
+.info_item {
+  display: block;
+  padding: 0 0 0.6em 0; }
+
+.info_caption {
+  font-size: 65%;
+  position: absolute; }
+
+.info_value {
+  position: relative;
+  top: 0.6em;
+  padding: 0 0.5em 0 1.5em; }
+
+.activity_info {
+  justify-content: flex-start; }
+
+#comments form {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0 0.3em 0.3em 0.3em;
+  padding: 0 1em 1em 1em; }
+
+#comment {
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box; }
+
+#submit {
+  margin-top: 2em; }
+
+#name {
+  margin-bottom: 1em;
+  position: relative;
+  top: 3em; }
+
+#name_label {
+  position: relative;
+  top: 2em; }
+
+#text_label, #text {
+  font-size: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  height: 0; }
+
+.comment_text {
+  margin: 1em; }
+
+.comment {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 0.3em; }
+  .comment p {
+    text-indent: 2em;
+    margin: 0;
+    line-height: 150%; }
+    .comment p:first-of-type {
+      text-indent: 0em;
+      margin-top: 1em; }
+
+.header {
+  font-size: 1em;
+  background-color: #ebebeb;
+  margin: 0;
+  padding: 0.3em;
+  border-bottom: 1px solid #676767;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-image: linear-gradient(to right, #ebebeb, #ebebeb, #ebebeb, #377eb8); }
+  .header a {
+    color: black;
+    font-weight: normal;
+    display: inline-block; }
+  .header .date {
+    width: 7em;
+    font-size: 60%;
+    display: inline-block; }
+  .header h3 {
+    display: inline; }
+
+#single_activity .activity_info {
+  justify-content: flex-start;
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767;
+  background: white; }
+
+body {
+  overflow: hidden;
+  padding: 0 10px 0 0; }
+
+#page_single {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  justify-content: stretch;
+  align-content: stretch;
+  grid-template-areas: "main-column photos" "main-column map";
+  grid-template-rows: 230px 1fr;
+  grid-template-columns: auto 1fr;
+  grid-row-gap: 30px; }
+
+#single_activity {
+  grid-area: main-column; }
+
+#single_images {
+  grid-area: photos;
+  overflow-x: auto;
+  overflow-y: hidden; }
+
+.small_map {
+  grid-area: map; }
+
+#single_activity {
+  float: left;
+  height: 100%;
+  width: 40em;
+  overflow-y: auto;
+  direction: rtl; }
+  #single_activity * {
+    direction: ltr; }
+
+.small_map {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  position: relative;
+  bottom: 10px;
+  touch-action: none;
+  height: 100% !important; }
+
+#single_images {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #676767;
+  border-radius: 5px;
+  position: relative;
+  top: 10px; }
+  #single_images img {
+    height: 200px;
+    border: 1px solid #676767;
+    margin: 5px; }
+
+.header {
+  font-size: 1em;
+  background-color: #ebebeb;
+  margin: 0;
+  padding: 0.3em;
+  border-bottom: 1px solid #676767;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-image: linear-gradient(to right, #ebebeb 75%, #377eb8); }
+  .header a {
+    color: black;
+    font-weight: normal;
+    display: inline-block; }
+  .header .date {
+    width: 7em;
+    font-size: 60%;
+    display: inline-block; }
+  .header h3 {
+    display: inline; }
+
+.comment_text {
+  margin: 1em; }
+
+#headline_box {
+  border: 1px solid #676767;
+  border-radius: 5px;
+  background-color: white;
+  margin: 2em 0.3em 0.3em 0.3em;
+  padding: 0.5em; }
+  #headline_box h2 {
+    margin: 0;
+    padding: 0.2em 0.5em 0.2em 0.5em; }
+
+a.back {
+  font-size: 150%;
+  background-color: #377eb8;
+  display: block;
+  margin: 10px;
+  padding: 0.2em;
+  width: 15em;
+  text-align: center;
+  border: 1px solid #676767;
+  border-radius: 5px;
+  color: white;
+  float: right; }
+
+#whole_info {
+  margin: 4em 0.5em 0.5em 0.5em;
+  background: none;
+  position: relative; }
+
+.single_activity_description {
+  padding: 0.5em;
+  border-left: 1px solid #676767;
+  border-right: 1px solid #676767;
+  border-bottom: 1px solid #676767;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: white; }
+  .single_activity_description p {
+    text-indent: 2em;
+    margin: 0;
+    line-height: 150%; }
+    .single_activity_description p:first-of-type {
+      text-indent: 0em;
+      margin-top: 1em; }
+
+#single_activity_name {
+  font-size: 1em;
+  background-color: #ebebeb;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #676767;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  background-image: linear-gradient(to right, #ebebeb 75%, #377eb8); }
+  #single_activity_name .date {
+    font-size: 100%;
+    display: inline-block;
+    vertical-align: top; }
+  #single_activity_name h1 {
+    display: inline-block;
+    width: 85%;
+    margin: 0; }
+
+@media only screen and (max-width: 800px) {
+  a.back {
+    float: none;
+    margin: 0 auto;
+    width: 90vw; }
+  body {
+    overflow: auto;
+    height: 100vh; }
+  #single_activity {
+    width: 100%; }
+  #page_single {
+    width: 100%;
+    height: auto;
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-content: stretch;
+    align-content: stretch;
+    grid-template-areas: "photos" "main-column" "map";
+    grid-template-rows: 230px auto 70vh;
+    grid-template-columns: auto;
+    grid-row-gap: 30px; } }
+
+#page_single:before {
+  content: '';
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: block;
+  z-index: -1;
+  background: url(/images/zuzka.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+  transform: scale(1.1); }

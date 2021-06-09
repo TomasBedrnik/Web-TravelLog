@@ -57,7 +57,7 @@ def create_app():
                 return redirect("/#comments")
 
         else:
-            return render_template("index.html", content=read.read_stats(), comments=read.read_comments(0))
+            return render_template("index.html", content=read.read_stats(), activities=read.read_activities(), comments=read.read_comments(0))
 
     @app.route('/map')
     def show_map():
