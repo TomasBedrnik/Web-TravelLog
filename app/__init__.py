@@ -38,7 +38,7 @@ def create_app():
 
     @app.context_processor
     def inject_stage_and_region():
-        return dict(webpushr_key=Credentials.webpushr_key)
+        return dict(webpushr_key=Credentials.webpushr_key, goole_analytics_ID=Credentials.goole_analytics_ID)
 
     @app.route('/', methods=['GET', 'POST'])
     def hello_world():
@@ -84,7 +84,8 @@ def create_app():
         else:
             return render_template("activity.html", content=read.read_activity(activity_id),
                                    polylines=read.read_activity_map(activity_id),
-                                   comments=read.read_comments(activity_id))
+                                   comments=read.read_comments(activity_id),
+                                   before_after=read.read_before_after(activity_id))
 
     # TODO: Delete this when alpha development stage finished
     @app.route('/refresh')
