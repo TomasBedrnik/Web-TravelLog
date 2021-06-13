@@ -3,7 +3,7 @@
 <head>
     {% include 'head' %}
     <title>Zuzka jde kolem republiky - {{content[5]}}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/activity.css') }}"/>
+    <link rel="stylesheet" href="/css/activity.css?v=01"/>
 
 
     <script src="{{ url_for('static', filename='external/leaflet.js') }}"></script>
@@ -16,7 +16,7 @@
 
     <script src="https://api.mapy.cz/loader.js"></script>
     <script>Loader.load();</script>
-    <script src="{{ url_for('static', filename='mapycz.js') }}"></script>
+    <script src="/mapycz.js?v=01"></script>
     {% if content[14] is not none %}
         <style>
             {% set images_small = content[14].split(",") %}
@@ -36,7 +36,19 @@
 <body>
 <div id="page_single">
     <div id="single_activity">
-        <a class="back" href="/map">Zpět na celou mapu</a>
+        <div class="nav_box">
+            <div class="nav_before">
+                {% if before_after[0] is not none %}
+                    <a class="previous_day" href="/activity/{{before_after[0]}}">Předešlý den</a>
+                {% endif %}
+            </div>
+            <div class="nav_map"><a class="back_to_map" href="/map">Celá mapa</a></div>
+            <div class="nav_after">
+                {% if before_after[1] is not none %}
+                    <a class="next_day" href="/activity/{{before_after[1]}}">Následující den</a>
+                {% endif %}
+            </div>
+        </div>
         <div id="whole_info">
             <div id="single_activity_name">
                 <div class="date">{{content[4].strftime('%d. %m. %Y %H:%M')}}</div>
