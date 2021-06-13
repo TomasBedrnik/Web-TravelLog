@@ -56,7 +56,7 @@ function add_mapycz_single(polyline) {
         width: 1,
         opacity: 1,
         style: JAK.Vector.STYLE_DASH,
-        outlineColor: "#377eb8",
+        outlineColor: "#7f49f1",
         outlineWidth: 2,
         outlineOpacity: 1
     };
@@ -89,7 +89,7 @@ function add_mapycz(polylines) {
     m.addLayer(layer);
     layer.enable();
 
-    let colours = ["#e41a1c", "#377eb8", "#b3ff00", "#984ea3", "#ff7f00", "#ffff33", "#a65628", "#f781bf"];
+    let colours = ["#e41a1c", "#377eb8", "#b3ff00", "#ff00fc", "#ff7f00", "#ffff33", "#a65628", "#7f49f1"];
     let array_coordinates = new Array(polylines.length);
     geometryIds = new Array(polylines.length);
 

@@ -3,7 +3,7 @@
 <head>
     {% include 'head' %}
     <title>Zuzka jde kolem republiky - Mapa</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/mapycz.css') }}"/>
+    <link rel="stylesheet" href="/css/mapycz.css?v=01"/>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="{{ url_for('static', filename='external/leaflet.js') }}"></script>
@@ -16,7 +16,7 @@
 
     <script src="https://api.mapy.cz/loader.js"></script>
     <script>Loader.load();</script>
-    <script src="{{ url_for('static', filename='mapycz.js') }}"></script>
+    <script src="/mapycz.js?v=01"></script>
 
 
 </head>

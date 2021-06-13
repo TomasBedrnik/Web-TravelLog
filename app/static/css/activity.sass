@@ -112,7 +112,27 @@ body
     margin: 0
     padding: 0.2em 0.5em 0.2em 0.5em
 
-
+.nav_box
+  display: grid
+  grid-template-columns: 2fr 3fr 2fr
+  grid-column-gap: $border_radius
+  margin: $border_radius
+  div
+    a
+      display: block
+      background: $activity_color_1
+      border: $border_grey
+      border-radius: $border_radius
+      text-align: center
+      padding: $border_radius
+      font-size: 120%
+      color: white
+    a.previous_day
+      background: #003eb1
+      text-align: right
+    a.next_day
+      background: #620002
+      text-align: left
 
 a.back
   font-size: 150%
@@ -128,7 +148,7 @@ a.back
   float: right
 
 #whole_info
-  margin: 4em 0.5em 0.5em 0.5em
+  margin: $border_radius
   background: none
   position: relative
 

@@ -204,6 +204,27 @@ body {
     margin: 0;
     padding: 0.2em 0.5em 0.2em 0.5em; }
 
+.nav_box {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+  grid-column-gap: 5px;
+  margin: 5px; }
+  .nav_box div a {
+    display: block;
+    background: #377eb8;
+    border: 1px solid #676767;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    font-size: 120%;
+    color: white; }
+  .nav_box div a.previous_day {
+    background: #003eb1;
+    text-align: right; }
+  .nav_box div a.next_day {
+    background: #620002;
+    text-align: left; }
+
 a.back {
   font-size: 150%;
   background-color: #377eb8;
@@ -218,7 +239,7 @@ a.back {
   float: right; }
 
 #whole_info {
-  margin: 4em 0.5em 0.5em 0.5em;
+  margin: 5px;
   background: none;
   position: relative; }
 
