@@ -57,6 +57,25 @@ def read_activity_map(activity_id):
     return list_polyline
 
 
+def read_before_after(activity_id):
+    db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
+                       database=Credentials.database, collation="utf8mb4_general_ci")
+    cursor = db.cursor()
+    cursor.execute("SELECT id FROM activities order by start_date_local desc")
+    data = cursor.fetchall()
+    db.disconnect()
+    before = None;
+    after = None
+    for i in range(len(data)):
+        if data[i][0] == activity_id:
+            if len(data) > i+1:
+                before = data[i+1][0]
+            if i > 0:
+                after = data[i-1][0]
+
+    return [before, after]
+
+
 def read_comments(activity_id):
     db = mysql.connect(host=Credentials.host, user=Credentials.user, passwd=Credentials.passwd,
                        database=Credentials.database, collation="utf8mb4_general_ci")
